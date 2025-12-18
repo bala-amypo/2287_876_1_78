@@ -17,25 +17,31 @@ public class TaskAssignmentRecord {
     @Column(nullable = false)
     private Long volunteerId;
 
+    @Column(nullable = false)
     private LocalDateTime assignedAt;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private AssignmentStatus status;
 
+    @Column(length = 500)
     private String notes;
 
+    // JPA requires a no-arg constructor
     public TaskAssignmentRecord() {
     }
 
     @PrePersist
-    public void onAssign() {
-        if (this.status == null) {
-            this.status = AssignmentStatus.ACTIVE;
+    protected void onCreate() {
+        if (assignedAt == null) {
+            assignedAt = LocalDateTime.now();
         }
-        if (this.assignedAt == null) {
-            this.assignedAt = LocalDateTime.now();
+        if (status == null) {
+            status = AssignmentStatus.ACTIVE;
         }
     }
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
