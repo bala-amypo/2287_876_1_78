@@ -7,7 +7,7 @@ import jakarta.persistence.*;
     name = "users",
     uniqueConstraints = @UniqueConstraint(columnNames = "email")
 )
-public class User {
+public enum User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

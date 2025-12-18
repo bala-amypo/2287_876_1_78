@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
     name = "task_record",
     uniqueConstraints = @UniqueConstraint(columnNames = "taskCode")
 )
-public class TaskRecord {
+public enum TaskRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

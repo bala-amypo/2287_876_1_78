@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "task_assignment")
-public class TaskAssignmentRecord {
+public enum TaskAssignmentRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,6 @@ public class TaskAssignmentRecord {
 
     private String notes;
 
-    // ✅ Required by JPA
     public TaskAssignmentRecord() {
     }
 
