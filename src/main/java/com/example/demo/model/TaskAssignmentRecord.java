@@ -17,7 +17,7 @@ public class TaskAssignmentRecord {
     @Column(nullable = false)
     private Long volunteerId;
 
-    @Column(nullable = false) ++++++
+    @Column(nullable = false)
     private LocalDateTime assignedAt;
 
     @Enumerated(EnumType.STRING)
