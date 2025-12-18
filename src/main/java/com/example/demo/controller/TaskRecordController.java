@@ -5,49 +5,47 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.TaskAssignment;
-import com.example.demo.service.TaskAssignmentService;
+import com.example.demo.entity.Task;
+import com.example.demo.service.TaskService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/assignments")
-@Tag(name = "Task Assignments", description = "Task assignment APIs")
-public class TaskAssignmentController {
+@RequestMapping("/api/tasks")
+@Tag(name = "Task Records", description = "Task management APIs")
+public class TaskRecordController {
 
     @Autowired
-    private TaskAssignmentService assignmentService;
+    private TaskService taskService;
 
-    @Operation(summary = "Auto assign task")
-    @PostMapping("/assign/{taskId}")
-    public TaskAssignment autoAssign(@PathVariable Long taskId) {
-        return assignmentService.autoAssign(taskId);
+    @Operation(summary = "Create task")
+    @PostMapping
+    public Task createTask(@RequestBody Task task) {
+        return taskService.createTask(task);
     }
 
-    @Operation(summary = "Update assignment status")
-    @PutMapping("/{id}/status")
-    public TaskAssignment updateStatus(
-            @PathVariable Long id,
-            @RequestParam String status) {
-        return assignmentService.updateStatus(id, status);
+    @Operation(summary = "Update task")
+    @PutMapping("/{id}")
+    public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
+        return taskService.updateTask(id, task);
     }
 
-    @Operation(summary = "Get assignments by volunteer")
-    @GetMapping("/volunteer/{volunteerId}")
-    public List<TaskAssignment> getByVolunteer(@PathVariable Long volunteerId) {
-        return assignmentService.getByVolunteer(volunteerId);
+    @Operation(summary = "List open tasks")
+    @GetMapping("/open")
+    public List<Task> getOpenTasks() {
+        return taskService.getOpenTasks();
     }
 
-    @Operation(summary = "Get assignments by task")
-    @GetMapping("/task/{taskId}")
-    public List<TaskAssignment> getByTask(@PathVariable Long taskId) {
-        return assignmentService.getByTask(taskId);
+    @Operation(summary = "Get task by ID")
+    @GetMapping("/{id}")
+    public Task getTask(@PathVariable Long id) {
+        return taskService.getTaskById(id);
     }
 
-    @Operation(summary = "List all assignments")
+    @Operation(summary = "List all tasks")
     @GetMapping
-    public List<TaskAssignment> getAllAssignments() {
-        return assignmentService.getAll();
+    public List<Task> getAllTasks() {
+        return taskService.getAllTasks();
     }
 }
