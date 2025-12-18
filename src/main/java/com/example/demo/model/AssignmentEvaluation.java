@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "assignment_evaluation")
-public enum AssignmentEvaluation {
+public class AssignmentEvaluation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
