@@ -15,7 +15,7 @@ public class VolunteerSkillRecord {
     private String skillName;
 
     @Enumerated(EnumType.STRING)
-    private SkillLevel skillLevel;
+    private String skillLevel;
 
     private Boolean certified;
     private LocalDateTime updatedAt;
@@ -50,11 +50,11 @@ public class VolunteerSkillRecord {
         this.skillName = skillName;
     }
 
-    public SkillLevel getSkillLevel() {
+    public String getSkillLevel() {
         return skillLevel;
     }
 
-    public void setSkillLevel(SkillLevel skillLevel) {
+    public String setSkillLevel(SkillLevel skillLevel) {
         this.skillLevel = skillLevel;
     }
 

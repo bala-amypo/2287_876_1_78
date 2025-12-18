@@ -24,7 +24,7 @@ public class VolunteerProfile {
     private String phone;
 
     @Enumerated(EnumType.STRING)
-    private AvailabilityStatus availabilityStatus;
+    private String availabilityStatus;
 
     private LocalDateTime createdAt;
 
@@ -73,11 +73,11 @@ public class VolunteerProfile {
         this.phone = phone;
     }
 
-    public AvailabilityStatus getAvailabilityStatus() {
+    public String getAvailabilityStatus() {
         return availabilityStatus;
     }
 
-    public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
+    public String setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
     }
 
