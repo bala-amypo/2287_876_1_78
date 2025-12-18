@@ -28,7 +28,7 @@ public class VolunteerProfile {
     @Column(length = 500)
     private String bio;
 
-    // ✅ Required by JPA
+    // ✅ JPA requires no-arg constructor
     public VolunteerProfile() {
     }
 
@@ -43,7 +43,7 @@ public class VolunteerProfile {
     }
 
     public Long getUserId() {
-        return userId;   // ✅ return present
+        return userId;
     }
 
     public void setUserId(Long userId) {
@@ -51,7 +51,7 @@ public class VolunteerProfile {
     }
 
     public String getPhone() {
-        return phone;   // ✅ return present
+        return phone;
     }
 
     public void setPhone(String phone) {
@@ -59,7 +59,7 @@ public class VolunteerProfile {
     }
 
     public String getAddress() {
-        return address; // ✅ return present
+        return address;
     }
 
     public void setAddress(String address) {
@@ -67,7 +67,7 @@ public class VolunteerProfile {
     }
 
     public String getSkills() {
-        return skills;  // ✅ return present
+        return skills;
     }
 
     public void setSkills(String skills) {
@@ -75,7 +75,7 @@ public class VolunteerProfile {
     }
 
     public String getAvailability() {
-        return availability; // ✅ return present
+        return availability;
     }
 
     public void setAvailability(String availability) {
@@ -83,8 +83,10 @@ public class VolunteerProfile {
     }
 
     public String getBio() {
-        return bio; // ✅ return present
+        return bio;
     }
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+}
