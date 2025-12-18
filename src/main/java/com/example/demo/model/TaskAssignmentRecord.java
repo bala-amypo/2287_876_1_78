@@ -39,9 +39,10 @@ public class TaskAssignmentRecord {
         if (status == null) {
             status = AssignmentStatus.ACTIVE;
         }
+
     }
 
-    // Getters and Setters
+  
 
     public Long getId() {
         return id;

@@ -54,7 +54,7 @@ public class VolunteerSkillRecord {
         return skillLevel;
     }
 
-    public String setSkillLevel(SkillLevel skillLevel) {
+    public String setSkillLevel(String skillLevel) {
         this.skillLevel = skillLevel;
     }
 
