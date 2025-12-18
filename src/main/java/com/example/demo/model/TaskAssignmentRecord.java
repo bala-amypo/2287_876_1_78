@@ -11,7 +11,10 @@ public class TaskAssignmentRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Long taskId;
+
+    @Column(nullable = false)
     private Long volunteerId;
 
     private LocalDateTime assignedAt;
@@ -21,10 +24,18 @@ public class TaskAssignmentRecord {
 
     private String notes;
 
+    // ✅ Required by JPA
+    public TaskAssignmentRecord() {
+    }
+
     @PrePersist
     public void onAssign() {
-        this.status = AssignmentStatus.ACTIVE;
-        this.assignedAt = LocalDateTime.now();
+        if (this.status == null) {
+            this.status = AssignmentStatus.ACTIVE;
+        }
+        if (this.assignedAt == null) {
+            this.assignedAt = LocalDateTime.now();
+        }
     }
 
     public Long getId() {
