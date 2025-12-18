@@ -55,3 +55,5 @@ public class VolunteerSkillRecord {
 
     public void setSkillLevel(String skillLevel) {
         this.setSkillLevel = setSkillLevel;
+        }
+}
