@@ -20,7 +20,7 @@ public class TaskAssignmentRecord {
     @Column(nullable = false)
     private LocalDateTime assignedAt;
 
-    @Enumerated(EnumType.STRING)
+  
     @Column(nullable = false)
     private String status;
 
@@ -37,7 +37,7 @@ public class TaskAssignmentRecord {
             assignedAt = LocalDateTime.now();
         }
         if (status == null) {
-            status = String.ACTIVE;
+            status = "ACTIVE";
         }
 
     }
