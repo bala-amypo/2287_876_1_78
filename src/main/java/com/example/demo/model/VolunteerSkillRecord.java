@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "volunteer_skill")
@@ -11,20 +10,20 @@ public class VolunteerSkillRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Long volunteerId;
+
+    @Column(nullable = false, length = 100)
     private String skillName;
 
-    @Enumerated(EnumType.STRING)
-    private String skillLevel;
+    @Column(length = 50)
+    private String skillLevel;   // BEGINNER, INTERMEDIATE, EXPERT
 
-    private Boolean certified;
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    @PreUpdate
-    public void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+    // ✅ No-arg constructor (required by JPA)
+    public VolunteerSkillRecord() {
     }
+
+    // ---------------- GETTERS & SETTERS ----------------
 
     public Long getId() {
         return id;
@@ -54,19 +53,5 @@ public class VolunteerSkillRecord {
         return skillLevel;
     }
 
-    public String setSkillLevel(String skillLevel) {
-        this.skillLevel = skillLevel;
-    }
-
-    public Boolean getCertified() {
-        return certified;
-    }
-
-    public void setCertified(Boolean certified) {
-        this.certified = certified;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-}
+    public void setSkillLevel(String skillLevel) {
+        this.setSkillLevel = setSkillLevel;
