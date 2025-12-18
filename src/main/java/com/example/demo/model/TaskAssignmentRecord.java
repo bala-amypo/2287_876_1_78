@@ -22,7 +22,7 @@ public class TaskAssignmentRecord {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AssignmentStatus status;
+    private String status;
 
     @Column(length = 500)
     private String notes;
@@ -67,11 +67,11 @@ public class TaskAssignmentRecord {
         return assignedAt;
     }
 
-    public AssignmentStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(AssignmentStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
