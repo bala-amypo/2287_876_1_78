@@ -37,7 +37,7 @@ public class TaskAssignmentRecord {
             assignedAt = LocalDateTime.now();
         }
         if (status == null) {
-            status = AssignmentStatus.ACTIVE;
+            status = String.ACTIVE;
         }
 
     }
