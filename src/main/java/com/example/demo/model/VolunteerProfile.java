@@ -77,7 +77,7 @@ public class VolunteerProfile {
         return availabilityStatus;
     }
 
-    public String setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
+    public String setAvailabilityStatus(String availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
     }
 
