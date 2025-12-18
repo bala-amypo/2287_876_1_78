@@ -1,37 +1,38 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(
-    name = "volunteer_profile",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = "volunteerId"),
-        @UniqueConstraint(columnNames = "email"),
-        @UniqueConstraint(columnNames = "phone")
-    }
-)
+@Table(name = "volunteer_profile")
 public class VolunteerProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String volunteerId;
-    private String fullName;
-    private String email;
+    @Column(nullable = false)
+    private Long userId;
+
+    @Column(length = 100)
     private String phone;
 
-    @Enumerated(EnumType.STRING)
-    private String availabilityStatus;
+    @Column(length = 255)
+    private String address;
 
-    private LocalDateTime createdAt;
+    @Column(length = 200)
+    private String skills;
 
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
+    @Column(length = 100)
+    private String availability;
+
+    @Column(length = 500)
+    private String bio;
+
+    // ✅ Required by JPA
+    public VolunteerProfile() {
     }
+
+    // ---------------- GETTERS & SETTERS ----------------
 
     public Long getId() {
         return id;
@@ -41,47 +42,49 @@ public class VolunteerProfile {
         this.id = id;
     }
 
-    public String getVolunteerId() {
-        return volunteerId;
+    public Long getUserId() {
+        return userId;   // ✅ return present
     }
 
-    public void setVolunteerId(String volunteerId) {
-        this.volunteerId = volunteerId;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getPhone() {
-        return phone;
+        return phone;   // ✅ return present
     }
-    
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getAvailabilityStatus() {
-        return availabilityStatus;
+    public String getAddress() {
+        return address; // ✅ return present
     }
 
-    public String setAvailabilityStatus(String availabilityStatus) {
-        this.availabilityStatus = availabilityStatus;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public String getSkills() {
+        return skills;  // ✅ return present
     }
-}
+
+    public void setSkills(String skills) {
+        this.skills = skills;
+    }
+
+    public String getAvailability() {
+        return availability; // ✅ return present
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
+    public String getBio() {
+        return bio; // ✅ return present
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
