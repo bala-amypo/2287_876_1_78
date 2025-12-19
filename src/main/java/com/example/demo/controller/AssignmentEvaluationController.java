@@ -17,6 +17,7 @@ public class AssignmentEvaluationController {
     @PostMapping
     public AssignmentEvaluationRecord evaluate(
             @RequestBody AssignmentEvaluationRecord evaluation) {
-        return service.save(evaluation);
+        return service.evaluateAssignment(evaluation);
+
     }
 }
