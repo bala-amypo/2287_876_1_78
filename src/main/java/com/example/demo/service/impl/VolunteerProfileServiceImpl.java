@@ -1,43 +1,28 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.service.VolunteerProfileService;
-import com.example.demo.repository.VolunteerProfileRepository;
-
 import com.example.demo.model.VolunteerProfile;
+import com.example.demo.repository.VolunteerProfileRepository;
+import com.example.demo.service.VolunteerProfileService;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class VolunteerProfileServiceImpl implements VolunteerProfileService {
 
-    private final VolunteerProfileRepository repo;
+    private final VolunteerProfileRepository repository;
 
-    public VolunteerProfileServiceImpl(VolunteerProfileRepository repo) {
-        this.repo = repo;
+    public VolunteerProfileServiceImpl(VolunteerProfileRepository repository) {
+        this.repository = repository;
     }
 
-    public VolunteerProfile registerVolunteer(RegisterRequest req) {
-        if (repo.existsByEmail(req.getEmail()))
-            throw new BadRequestException("Email already exists");
-
-        VolunteerProfile v =
-            new VolunteerProfile(req.getName(), req.getEmail(), "AVAILABLE");
-
-        return repo.save(v);
+    @Override
+    public VolunteerProfile save(VolunteerProfile profile) {
+        return repository.save(profile);
     }
 
-    public VolunteerProfile updateAvailability(Long id, String status) {
-        if (!status.equals("AVAILABLE") && !status.equals("UNAVAILABLE"))
-            throw new BadRequestException("Invalid availability");
-
-        VolunteerProfile v = repo.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Volunteer not found"));
-
-        v.setAvailabilityStatus(status);
-        return repo.save(v);
-    }
-
-    public List<VolunteerProfile> getAvailableVolunteers() {
-        return repo.findByAvailabilityStatus("AVAILABLE");
+    @Override
+    public VolunteerProfile updateAvailability(Long id, boolean available) {
+        VolunteerProfile profile = repository.findById(id).orElse(null);
+        profile.setAvailable(available);
+        return repository.save(profile);
     }
 }

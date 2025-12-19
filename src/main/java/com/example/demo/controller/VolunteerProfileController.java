@@ -1,15 +1,11 @@
 package com.example.demo.controller;
 
-
-
 import com.example.demo.model.VolunteerProfile;
 import com.example.demo.service.VolunteerProfileService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/volunteers")
+@RequestMapping("/volunteer")
 public class VolunteerProfileController {
 
     private final VolunteerProfileService service;
@@ -19,20 +15,14 @@ public class VolunteerProfileController {
     }
 
     @PostMapping
-    public VolunteerProfile register(@RequestBody RegisterRequest request) {
-        return service.registerVolunteer(request);
+    public VolunteerProfile create(@RequestBody VolunteerProfile profile) {
+        return service.save(profile);
     }
 
-    @PatchMapping("/{id}/availability")
+    @PutMapping("/{id}/availability")
     public VolunteerProfile updateAvailability(
             @PathVariable Long id,
-            @RequestBody AvailabilityUpdateRequest request) {
-
-        return service.updateAvailability(id, request.getAvailabilityStatus());
-    }
-
-    @GetMapping("/available")
-    public List<VolunteerProfile> getAvailableVolunteers() {
-        return service.getAvailableVolunteers();
+            @RequestParam boolean available) {
+        return service.updateAvailability(id, available);
     }
 }
