@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-
+import com.example.demo.dto.EvaluationRequest;   // ✅ MISSING IMPORT FIXED
 import com.example.demo.model.AssignmentEvaluationRecord;
 import com.example.demo.service.AssignmentEvaluationService;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +16,7 @@ public class AssignmentEvaluationController {
     }
 
     @PostMapping
-    public AssignmentEvaluationRecord evaluate(
-            @RequestBody EvaluationRequest request) {
+    public AssignmentEvaluationRecord evaluate(@RequestBody EvaluationRequest request) {
 
         AssignmentEvaluationRecord record =
                 new AssignmentEvaluationRecord(
