@@ -18,4 +18,6 @@ public class AuthController {
     public VolunteerProfile register(@RequestBody VolunteerProfile profile) {
     return volunteerProfileService.register(profile);
 }
+}
+
 
