@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.AssignmentEvaluation;
+import com.example.demo.model.AssignmentEvaluationRecord;
 import com.example.demo.service.AssignmentEvaluationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +15,8 @@ public class AssignmentEvaluationController {
     }
 
     @PostMapping
-    public AssignmentEvaluation evaluate(
-            @RequestBody AssignmentEvaluation evaluation) {
+    public AssignmentEvaluationRecord evaluate(
+            @RequestBody AssignmentEvaluationRecord evaluation) {
         return service.save(evaluation);
     }
 }
