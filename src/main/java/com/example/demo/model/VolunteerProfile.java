@@ -1,11 +1,12 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "volunteer_profiles")
 public class VolunteerProfile {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,10 +16,15 @@ public class VolunteerProfile {
     @Column(unique = true, nullable = false)
     private String email;
 
-    private String availabilityStatus;
+    private String availabilityStatus; // AVAILABLE / UNAVAILABLE
 
-    public VolunteerProfile() {
-    }
+    @OneToMany(mappedBy = "volunteerId", fetch = FetchType.LAZY)
+    private List<VolunteerSkillRecord> skills = new ArrayList<>();
+
+    @OneToMany(mappedBy = "volunteerId", fetch = FetchType.LAZY)
+    private List<TaskAssignmentRecord> assignments = new ArrayList<>();
+
+    public VolunteerProfile() {}
 
     public VolunteerProfile(String name, String email, String availabilityStatus) {
         this.name = name;
@@ -26,35 +32,12 @@ public class VolunteerProfile {
         this.availabilityStatus = availabilityStatus;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAvailabilityStatus() {
-        return availabilityStatus;
-    }
-
-    public void setAvailabilityStatus(String availabilityStatus) {
-        this.availabilityStatus = availabilityStatus;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getAvailabilityStatus() { return availabilityStatus; }
+    public void setAvailabilityStatus(String availabilityStatus) { this.availabilityStatus = availabilityStatus; }
 }
