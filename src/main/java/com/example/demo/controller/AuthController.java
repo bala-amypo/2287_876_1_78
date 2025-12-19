@@ -8,22 +8,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final VolunteerProfileService service;
+    private final VolunteerProfileService volunteerProfileService;
 
-    public AuthController(VolunteerProfileService service) {
-        this.service = service;
+    public AuthController(VolunteerProfileService volunteerProfileService) {
+        this.volunteerProfileService = volunteerProfileService;
     }
 
-   @PostMapping("/register")
+    @PostMapping("/register")
     public VolunteerProfile register(@RequestBody RegisterRequest request) {
-    return volunteerProfileService.registerVolunteer(request);
-}
-
-
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestBody VolunteerProfile profile) {
-        return "Login successful";
+        return volunteerProfileService.registerVolunteer(request);
     }
 }
