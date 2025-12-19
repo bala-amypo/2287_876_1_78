@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.*;
-import com.example.demo.model.*;
+import com.example.demo.model.TaskAssignmentRecord;
+import com.example.demo.model.TaskRecord;
+import com.example.demo.service.TaskAssignmentService;
+import com.example.demo.service.TaskRecordService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,18 +13,24 @@ public class TaskController {
     private final TaskRecordService taskService;
     private final TaskAssignmentService assignmentService;
 
-    public TaskController(TaskRecordService t, TaskAssignmentService a) {
-        this.taskService = t;
-        this.assignmentService = a;
+    public TaskController(TaskRecordService taskService,
+                          TaskAssignmentService assignmentService) {
+        this.taskService = taskService;
+        this.assignmentService = assignmentService;
     }
 
     @PostMapping
-    public TaskRecord create(@RequestBody TaskRecord task) {
+    public TaskRecord createTask(@RequestBody TaskRecord task) {
         return taskService.createTask(task);
     }
 
-    @PostMapping("/{id}/assign")
-    public TaskAssignmentRecord assign(@PathVariable Long id) {
-        return assignmentService.assignTask(id);
+    @GetMapping("/{id}")
+    public TaskRecord getTask(@PathVariable Long id) {
+        return taskService.getTaskById(id);
+    }
+
+    @PostMapping("/{taskId}/assign")
+    public TaskAssignmentRecord assignTask(@PathVariable Long taskId) {
+        return assignmentService.assignTask(taskId);
     }
 }

@@ -1,32 +1,48 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.dto.AuthResponse;
 import com.example.demo.dto.RegisterRequest;
-import com.example.demo.service.AuthService;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.example.demo.model.VolunteerProfile;
+import com.example.demo.security.JwtTokenProvider;
+import com.example.demo.service.VolunteerProfileService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "Authentication", description = "Auth APIs")
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final VolunteerProfileService volunteerProfileService;
 
-    @Operation(summary = "Register user")
-    @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
-        return authService.register(request);
+    public AuthController(AuthenticationManager authenticationManager,
+                          JwtTokenProvider jwtTokenProvider,
+                          VolunteerProfileService volunteerProfileService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.volunteerProfileService = volunteerProfileService;
     }
 
-    @Operation(summary = "Login user")
+    @PostMapping("/register")
+    public VolunteerProfile register(@RequestBody RegisterRequest request) {
+        return volunteerProfileService.registerVolunteer(request);
+    }
+
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
-        return authService.login(request);
+    public AuthResponse login(@RequestBody AuthRequest request) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(), request.getPassword())
+        );
+
+        String token = jwtTokenProvider.generateToken(
+                request.getUsername(), "ROLE_USER");
+
+        return new AuthResponse(token, null, "ROLE_USER");
     }
 }
