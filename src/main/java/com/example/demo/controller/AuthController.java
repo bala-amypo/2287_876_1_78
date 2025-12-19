@@ -14,8 +14,8 @@ public class AuthController {
         this.volunteerProfileService = volunteerProfileService;
     }
 
-    @PostMapping("/register")
+   @PostMapping("/register")
     public VolunteerProfile register(@RequestBody VolunteerProfile profile) {
-        return volunteerProfileService.register(profile);
-    }
+    return volunteerProfileService.register(profile);
 }
+
