@@ -27,9 +27,7 @@ public class AssignmentEvaluationServiceImpl
             AssignmentEvaluationRecord evaluation) {
 
         TaskAssignmentRecord assignment =
-                assignmentRepo.findById(evaluation.getAssignmentId())
-                        .orElseThrow(() ->
-                                new ResourceNotFoundException("Assignment not found"));
+                assignmentRepo.findById(evaluation.getAssignmentId()) .orElseThrow(() -> new ResourceNotFoundException("Assignment not found"));
 
         if (!"COMPLETED".equals(assignment.getStatus())) {
             throw new BadRequestException(
