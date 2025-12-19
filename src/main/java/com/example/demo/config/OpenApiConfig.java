@@ -12,9 +12,6 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .servers(Arrays.asList(
-                        new Server().url("https://vs.amypo.ai:9005")
-                ));
+        return new OpenAPI().servers(Arrays.asList( new Server().url("https://vs.amypo.ai:9005")));
     }
 }
