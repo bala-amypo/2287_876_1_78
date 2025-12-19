@@ -1,14 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthRequest;
-import com.example.demo.dto.AuthResponse;
-import com.example.demo.dto.RegisterRequest;
+
+
+
 import com.example.demo.model.VolunteerProfile;
-import com.example.demo.security.JwtTokenProvider;
+
 import com.example.demo.service.VolunteerProfileService;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
