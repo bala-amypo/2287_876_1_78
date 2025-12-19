@@ -15,7 +15,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public VolunteerProfile register(@RequestBody RegisterRequest request) {
-        return volunteerProfileService.registerVolunteer(request);
+    public VolunteerProfile register(@RequestBody VolunteerProfile profile) {
+        return volunteerProfileService.register(profile);
     }
 }
