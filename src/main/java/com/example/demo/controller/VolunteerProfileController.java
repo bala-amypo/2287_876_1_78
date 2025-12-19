@@ -16,7 +16,8 @@ public class VolunteerProfileController {
 
     @PostMapping
     public VolunteerProfile create(@RequestBody VolunteerProfile profile) {
-        return service.save(profile);
+         return volunteerProfileService.registerVolunteer(request);
+
     }
 
     @PutMapping("/{id}/availability")
