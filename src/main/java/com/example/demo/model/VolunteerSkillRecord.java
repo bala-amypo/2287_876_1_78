@@ -67,3 +67,5 @@ public class VolunteerSkillRecord {
 
     public void setCertified(boolean certified) {
         this.certified = certified;
+    }
+}

@@ -66,4 +66,18 @@ public class TaskRecord {
     }
 
     public String getRequiredSkillLevel() {
-        retur
+        return requiredSkillLevel;
+    }
+
+    public void setRequiredSkillLevel(String requiredSkillLevel) {
+        this.requiredSkillLevel = requiredSkillLevel;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}

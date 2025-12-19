@@ -45,4 +45,15 @@ public class TaskAssignmentRecord {
         return volunteerId;
     }
     
-    public void set
+    public void setVolunteerId(Long volunteerId) {
+        this.volunteerId = volunteerId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}
