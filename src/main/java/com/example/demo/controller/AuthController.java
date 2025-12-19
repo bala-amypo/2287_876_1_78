@@ -16,7 +16,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public VolunteerProfile register(@RequestBody VolunteerProfile profile) {
-        return service.register(profile);
+       return service.registerVolunteer(request);
+
     }
 
     @PostMapping("/login")
