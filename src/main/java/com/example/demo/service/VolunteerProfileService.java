@@ -7,7 +7,7 @@ import com.example.demo.model.*;
 import com.example.demo.dto.*;
 
 public interface VolunteerProfileService {
-    VolunteerProfile registerVolunteer(RegisterRequest request);
+  
     VolunteerProfile updateAvailability(Long id, String status);
     List<VolunteerProfile> getAvailableVolunteers();
 }
