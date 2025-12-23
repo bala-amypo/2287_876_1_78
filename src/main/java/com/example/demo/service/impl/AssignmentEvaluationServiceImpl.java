@@ -1,33 +1,36 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.exception.BadRequestException;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.AssignmentEvaluationRecord;
-import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.repository.AssignmentEvaluationRecordRepository;
-import com.example.demo.repository.TaskAssignmentRecordRepository;
+import com.example.demo.model.*;
+import com.example.demo.repository.*;
 import com.example.demo.service.AssignmentEvaluationService;
-import org.springframework.stereotype.Service;
+import java.util.*;
 
-@Service
-public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationService {
+public class AssignmentEvaluationServiceImpl
+        implements AssignmentEvaluationService {
 
-    private final AssignmentEvaluationRecordRepository evaluationRepository;
-    private final TaskAssignmentRecordRepository assignmentRepository;
+    private final AssignmentEvaluationRecordRepository evalRepo;
+    private final TaskAssignmentRecordRepository assignRepo;
 
-    public AssignmentEvaluationServiceImpl(AssignmentEvaluationRecordRepository evaluationRepository,
-                                           TaskAssignmentRecordRepository assignmentRepository) {
-        this.evaluationRepository = evaluationRepository;
-        this.assignmentRepository = assignmentRepository;
+    public AssignmentEvaluationServiceImpl(
+            AssignmentEvaluationRecordRepository e,
+            TaskAssignmentRecordRepository a) {
+        evalRepo = e; assignRepo = a;
     }
 
-    @Override
-    public AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord evaluation) {
-        TaskAssignmentRecord assignment = assignmentRepository.findById(evaluation.getAssignmentId())
-                .orElseThrow(() -> new ResourceNotFoundException("Assignment not found"));
-        if (!"COMPLETED".equalsIgnoreCase(assignment.getStatus())) {
-            throw new BadRequestException("Evaluation allowed only for COMPLETED assignments");
-        }
-        return evaluationRepository.save(evaluation);
+    public AssignmentEvaluationRecord evaluateAssignment(
+            AssignmentEvaluationRecord e) {
+
+        TaskAssignmentRecord a =
+                assignRepo.findById(e.getAssignmentId()).orElseThrow();
+
+        if (!"COMPLETED".equals(a.getStatus()))
+            throw new BadRequestException("Assignment not completed");
+
+        return evalRepo.save(e);
+    }
+
+    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(Long id) {
+        return evalRepo.findByAssignmentId(id);
     }
 }

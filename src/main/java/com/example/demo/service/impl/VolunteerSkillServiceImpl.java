@@ -1,36 +1,23 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.VolunteerSkillRecord;
 import com.example.demo.repository.VolunteerSkillRecordRepository;
 import com.example.demo.service.VolunteerSkillService;
-import com.example.demo.util.SkillLevelUtil;
-import org.springframework.stereotype.Service;
+import java.util.*;
 
-import java.util.List;
-
-@Service
 public class VolunteerSkillServiceImpl implements VolunteerSkillService {
 
-    private final VolunteerSkillRecordRepository volunteerSkillRecordRepository;
+    private final VolunteerSkillRecordRepository repo;
 
-    public VolunteerSkillServiceImpl(VolunteerSkillRecordRepository volunteerSkillRecordRepository) {
-        this.volunteerSkillRecordRepository = volunteerSkillRecordRepository;
+    public VolunteerSkillServiceImpl(VolunteerSkillRecordRepository r) {
+        this.repo = r;
     }
 
-    @Override
-    public List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId) {
-        return volunteerSkillRecordRepository.findByVolunteerId(volunteerId);
+    public VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord s) {
+        return repo.save(s);
     }
 
-    @Override
-    public VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill) {
-        if (skill.getSkillName() == null || skill.getSkillName().isBlank()) {
-            throw new BadRequestException("Skill name must not be blank");
-        }
-        if (!SkillLevelUtil.meetsOrExceeds(skill.getSkillLevel(), "BEGINNER")) {
-            throw new BadRequestException("Invalid skill level");
-        }
-        return volunteerSkillRecordRepository.save(skill);
+    public List<VolunteerSkillRecord> getSkillsByVolunteer(Long id) {
+        return repo.findByVolunteerId(id);
     }
 }
