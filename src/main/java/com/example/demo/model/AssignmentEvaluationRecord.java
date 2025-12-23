@@ -12,7 +12,7 @@ public class AssignmentEvaluationRecord {
     private Long assignmentId; // FK to TaskAssignmentRecord.id
 
     private Integer rating; // 1-5
-
+    private long setEvaluate
     @Column(length = 2000)
     private String comments;
 
@@ -32,4 +32,10 @@ public class AssignmentEvaluationRecord {
     public void setRating(Integer rating) { this.rating = rating; }
     public String getComments() { return comments; }
     public void setComments(String comments) { this.comments = comments; }
+    private Instant evaluatedAt;
+
+    public void setEvaluatedAt(Instant evaluatedAt) {
+    this.evaluatedAt = evaluatedAt;
+}
+
 }
