@@ -1,21 +1,24 @@
 package com.example.demo.util;
 
 public class SkillLevelUtil {
-    public enum Level {
-        BEGINNER,
-        INTERMEDIATE,
-        EXPERT;
 
-        public static Level from(String s) {
-            if (s == null) return null;
-            return Level.valueOf(s.trim().toUpperCase());
+    public static int levelRank(String level) {
+        if (level == null) return 0;
+        switch (level) {
+            case "BEGINNER": return 1;
+            case "INTERMEDIATE": return 2;
+            case "EXPERT": return 3;
+            default: return 0;
         }
     }
 
-    public static boolean meetsOrExceeds(String actual, String required) {
-        Level a = Level.from(actual);
-        Level r = Level.from(required);
-        if (a == null || r == null) return false;
-        return a.ordinal() >= r.ordinal();
+    public static int priorityRank(String priority) {
+        if (priority == null) return 0;
+        switch (priority) {
+            case "LOW": return 1;
+            case "MEDIUM": return 2;
+            case "HIGH": return 3;
+            default: return 0;
+        }
     }
 }
