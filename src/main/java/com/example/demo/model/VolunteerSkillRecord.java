@@ -17,7 +17,7 @@ public class VolunteerSkillRecord {
 
     private boolean certified;
 
-    public VolunteerSkillRecord() {}
+    public VolunteerSkillRecord() {
 
     public VolunteerSkillRecord(Long volunteerId, String skillName, String skillLevel, boolean certified) {
         this.volunteerId = volunteerId;
