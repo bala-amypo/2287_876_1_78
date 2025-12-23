@@ -1,33 +1,38 @@
 package com.example.demo.security;
 
-import com.example.demo.model.VolunteerProfile;
-import com.example.demo.repository.VolunteerProfileRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.*;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
-import java.util.Collections;
+public class CustomUserDetailsService
+        implements UserDetailsService {
 
-@Service
-public class CustomUserDetailsService implements UserDetailsService {
+    private final Map<String, UserDetails> users = new HashMap<>();
+    private final Map<String, Map<String, Object>> meta = new HashMap<>();
+    private final AtomicLong idGen = new AtomicLong(1);
 
-    private final VolunteerProfileRepository volunteerProfileRepository;
+    public Map<String, Object> registerUser(
+            String name, String email, String pwd, String role) {
 
-    public CustomUserDetailsService(VolunteerProfileRepository volunteerProfileRepository) {
-        this.volunteerProfileRepository = volunteerProfileRepository;
+        Long id = idGen.getAndIncrement();
+        UserDetails u = User.withUsername(email)
+                .password(pwd)
+                .roles(role)
+                .build();
+
+        users.put(email, u);
+
+        Map<String, Object> m = new HashMap<>();
+        m.put("userId", id);
+        m.put("role", role);
+        meta.put(email, m);
+        return m;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        VolunteerProfile vp = volunteerProfileRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        // For demo, we don't persist password hashes in VolunteerProfile; in a real app this would be separate.
-        // Use a placeholder password; authentication flow in AuthController should verify by external store.
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
-        return new User(vp.getEmail(), "$2a$10$Qe3Qm2S6M3oY8PzQz4E0EOsHjq5sHao3hY3m0GHHH9m3b0k2D9h2y", Collections.singleton(authority));
+    public UserDetails loadUserByUsername(String email) {
+        if (!users.containsKey(email))
+            throw new UsernameNotFoundException("User not found");
+        return users.get(email);
     }
 }
