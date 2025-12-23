@@ -19,12 +19,16 @@ public class VolunteerProfileController {
 
     @PostMapping
     public ResponseEntity<VolunteerProfile> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(volunteerProfileService.registerVolunteer(request));
+       volunteerProfileService.registerVolunteer(request);
+       return ResponseEntity.ok("Registered Successfully");
+
     }
 
     @PatchMapping("/{id}/availability")
     public ResponseEntity<VolunteerProfile> updateAvailability(@PathVariable Long id,
                                                                @RequestBody AvailabilityUpdateRequest request) {
-        return ResponseEntity.ok(volunteerProfileService.updateAvailability(id, request.getAvailabilityStatus()));
+        volunteerProfileService.registerVolunteer(request);
+        return ResponseEntity.ok("Registered Successfully");
+
     }
 }
