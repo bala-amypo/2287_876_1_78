@@ -12,6 +12,7 @@ public class VolunteerProfile {
     private Long id;
 
     private String name;
+    private Long volunteerId;
 
     @Column(unique = true, nullable = false)
     private String email;
@@ -40,4 +41,9 @@ public class VolunteerProfile {
     public void setEmail(String email) { this.email = email; }
     public String getAvailabilityStatus() { return availabilityStatus; }
     public void setAvailabilityStatus(String availabilityStatus) { this.availabilityStatus = availabilityStatus; }
+  public Long getVolunteerId() {
+    return volunteerId;
+  }
+
+
 }
