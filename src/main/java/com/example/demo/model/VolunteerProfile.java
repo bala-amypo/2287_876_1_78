@@ -44,6 +44,10 @@ public class VolunteerProfile {
   public Long getVolunteerId() {
     return volunteerId;
   }
+  public void setVolunteerId()
+  {
+    this.volunteerId = volunteerId;
+  }
 
 
 }
