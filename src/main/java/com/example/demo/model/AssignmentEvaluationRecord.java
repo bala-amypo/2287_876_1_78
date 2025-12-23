@@ -12,7 +12,7 @@ public class AssignmentEvaluationRecord {
     private Long assignmentId; // FK to TaskAssignmentRecord.id
 
     private Integer rating; // 1-5
-    private long setEvaluate
+    private Instant setEvaluatedAt;
     @Column(length = 2000)
     private String comments;
 

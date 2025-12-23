@@ -19,7 +19,8 @@ public class TaskRecord {
     private String requiredSkillLevel;
 
     private String status; // OPEN, ACTIVE, COMPLETED, ...
-
+    private String taskName;
+    private int priority;
     public TaskRecord() {}
 
     public TaskRecord(String title, String description, String requiredSkill, String requiredSkillLevel, String status) {
@@ -42,4 +43,15 @@ public class TaskRecord {
     public void setRequiredSkillLevel(String requiredSkillLevel) { this.requiredSkillLevel = requiredSkillLevel; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+   
+
+public String getTaskName() {
+    return taskName;
+}
+
+public int getPriority() {
+    return priority;
+}
+
 }
