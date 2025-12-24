@@ -1,41 +1,41 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.dto.AvailabilityUpdateRequest;
-// import com.example.demo.dto.RegisterRequest;
-// import com.example.demo.model.VolunteerProfile;
-// import com.example.demo.service.VolunteerProfileService;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.*;
+import com.example.demo.dto.AvailabilityUpdateRequest;
+import com.example.demo.dto.RegisterRequest;
+import com.example.demo.model.VolunteerProfile;
+import com.example.demo.service.VolunteerProfileService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-// @RestController
-// @RequestMapping("/volunteers")
-// public class VolunteerProfileController {
+@RestController
+@RequestMapping("/volunteers")
+public class VolunteerProfileController {
 
-//     private final VolunteerProfileService volunteerProfileService;
+    private final VolunteerProfileService volunteerProfileService;
 
-//     public VolunteerProfileController(VolunteerProfileService volunteerProfileService) {
-//         this.volunteerProfileService = volunteerProfileService;
-//     }
+    public VolunteerProfileController(VolunteerProfileService volunteerProfileService) {
+        this.volunteerProfileService = volunteerProfileService;
+    }
 
-//     @PostMapping
-//     public ResponseEntity<VolunteerProfile> register(
-//             @RequestBody RegisterRequest request) {
+    @PostMapping
+    public ResponseEntity<VolunteerProfile> register(
+            @RequestBody RegisterRequest request) {
 
-//         VolunteerProfile savedProfile =
-//                 volunteerProfileService.registerVolunteer(request);
+        VolunteerProfile savedProfile =
+                volunteerProfileService.registerVolunteer(request);
 
-//         return ResponseEntity.ok(savedProfile);
-//     }
+        return ResponseEntity.ok(savedProfile);
+    }
 
-//     @PatchMapping("/{id}/availability")
-//     public ResponseEntity<VolunteerProfile> updateAvailability(
-//             @PathVariable Long id,
-//             @RequestBody AvailabilityUpdateRequest request) {
+    @PatchMapping("/{id}/availability")
+    public ResponseEntity<VolunteerProfile> updateAvailability(
+            @PathVariable Long id,
+            @RequestBody AvailabilityUpdateRequest request) {
 
-//         VolunteerProfile updated =
-//                 volunteerProfileService.updateAvailability(
-//                         id, request.getAvailability());
+        VolunteerProfile updated =
+                volunteerProfileService.updateAvailability(
+                        id, request.getAvailability());
 
-//         return ResponseEntity.ok(updated);
-//     }
-// }
+        return ResponseEntity.ok(updated);
+    }
+}
