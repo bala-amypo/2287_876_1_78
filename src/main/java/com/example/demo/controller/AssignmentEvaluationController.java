@@ -5,21 +5,21 @@ import com.example.demo.model.AssignmentEvaluationRecord;
 import com.example.demo.service.AssignmentEvaluationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+@PostMapping
+public ResponseEntity<AssignmentEvaluationRecord> evaluate(
+        @RequestBody EvaluationRequest request) {
 
-@RestController
-@RequestMapping("/evaluations")
-public class AssignmentEvaluationController {
+    Assignment assignment = new Assignment();
+    assignment.setId(request.getAssignmentId());
 
-    private final AssignmentEvaluationService assignmentEvaluationService;
+    AssignmentEvaluationRecord entity =
+            new AssignmentEvaluationRecord(
+                    assignment,
+                    request.getRating(),
+                    request.getComments()
+            );
 
-    public AssignmentEvaluationController(AssignmentEvaluationService assignmentEvaluationService) {
-        this.assignmentEvaluationService = assignmentEvaluationService;
-    }
-
-    @PostMapping
-    public ResponseEntity<AssignmentEvaluationRecord> evaluate(@RequestBody EvaluationRequest request) {
-        AssignmentEvaluationRecord entity = new AssignmentEvaluationRecord(
-                request.getAssignmentId(), request.getRating(), request.getComments());
-        return ResponseEntity.ok(assignmentEvaluationService.evaluateAssignment(entity));
-    }
+    return ResponseEntity.ok(
+            assignmentEvaluationService.evaluateAssignment(entity)
+    );
 }

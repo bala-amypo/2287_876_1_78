@@ -9,24 +9,33 @@ public class AssignmentEvaluationRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // ✅ REQUIRED for findByAssignment_Id
+    @ManyToOne
+    @JoinColumn(name = "assignment_id")
+    private Assignment assignment;
+
     private Integer score;
     private String remarks;
 
- 
+    // ✅ JPA needs no-arg constructor
+    public AssignmentEvaluationRecord() {
+    }
 
+    // constructor used in controller
+    public AssignmentEvaluationRecord(Assignment assignment, Integer score, String remarks) {
+        this.assignment = assignment;
+        this.score = score;
+        this.remarks = remarks;
+    }
 
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+
+    public Assignment getAssignment() { return assignment; }
+    public void setAssignment(Assignment assignment) { this.assignment = assignment; }
 
     public Integer getScore() { return score; }
     public void setScore(Integer score) { this.score = score; }
 
     public String getRemarks() { return remarks; }
     public void setRemarks(String remarks) { this.remarks = remarks; }
-    // ✅ MUST EXIST
-    public AssignmentEvaluationRecord(Long id, Integer score, String remarks) {
-        this.id = id;
-        this.score = score;
-        this.remarks = remarks;
-    }
 }
