@@ -17,7 +17,6 @@ public class VolunteerProfileController {
         this.volunteerProfileService = volunteerProfileService;
     }
 
-    // ✅ REGISTER VOLUNTEER
     @PostMapping
     public ResponseEntity<VolunteerProfile> register(
             @RequestBody RegisterRequest request) {
@@ -28,16 +27,15 @@ public class VolunteerProfileController {
         return ResponseEntity.ok(savedProfile);
     }
 
-    // ✅ UPDATE AVAILABILITY
     @PatchMapping("/{id}/availability")
     public ResponseEntity<VolunteerProfile> updateAvailability(
             @PathVariable Long id,
             @RequestBody AvailabilityUpdateRequest request) {
 
-        VolunteerProfile updatedProfile =
+        VolunteerProfile updated =
                 volunteerProfileService.updateAvailability(
                         id, request.getAvailability());
 
-        return ResponseEntity.ok(updatedProfile);
+        return ResponseEntity.ok(updated);
     }
 }
