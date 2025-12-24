@@ -1,11 +1,14 @@
 package com.example.demo.dto;
 
 public class AvailabilityUpdateRequest {
-    private Long volunteerId;
-    private String availabilityStatus;
 
-    public Long getVolunteerId() { return volunteerId; }
-    public void setVolunteerId(Long volunteerId) { this.volunteerId = volunteerId; }
-    public String getAvailabilityStatus() { return availabilityStatus; }
-    public void setAvailabilityStatus(String availabilityStatus) { this.availabilityStatus = availabilityStatus; }
+    private String availability;
+
+    public String getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
 }

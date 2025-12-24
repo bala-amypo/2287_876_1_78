@@ -23,6 +23,16 @@ public class TaskController {
     public ResponseEntity<TaskRecord> create(@RequestBody TaskRecord task) {
         return ResponseEntity.ok(taskRecordService.createTask(task));
     }
+    @PostMapping("/{taskId}/assign")
+    public ResponseEntity<TaskAssignmentRecord> assignVolunteer(
+        @PathVariable Long taskId) {
+
+    TaskAssignmentRecord record =
+            taskService.assignVolunteer(taskId);
+
+    return ResponseEntity.ok(record);
+}
+
 
     @PostMapping("/{taskId}/assign")
     public ResponseEntity<TaskAssignmentRecord> assign(@PathVariable Long taskId) {
