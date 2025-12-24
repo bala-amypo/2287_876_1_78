@@ -9,13 +9,9 @@ import java.util.Optional;
 @Repository
 public interface VolunteerProfileRepository extends JpaRepository<VolunteerProfile, Long> {
 
-    boolean existsByVolunteerId(String volunteerId);
-
-    boolean existsByEmail(String email);
-
-    boolean existsByPhone(String phone);
-
     Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
 
-    java.util.List<VolunteerProfile> findByAvailabilityStatus(String availabilityStatus);
+    Optional<VolunteerProfile> findByEmail(String email);
+
+    Optional<VolunteerProfile> findByPhone(String phone);
 }

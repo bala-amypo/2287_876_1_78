@@ -1,42 +1,55 @@
 package com.example.demo.model;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "task_assignments")
 public class TaskAssignmentRecord {
 
-    private Long volunteerId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private Long taskId;
+    private Long volunteerId;
     private String status;
-    private LocalDateTime assignedAt;
 
-public LocalDateTime getAssignedAt() {
-    return assignedAt;
-}
-
-public void setAssignedAt(LocalDateTime assignedAt) {
-    this.assignedAt = assignedAt;
-}
-
-    public String getStatus() {
-        return status;
+    @PrePersist
+    public void prePersist() {
+        if (this.status == null) {
+            this.status = "ACTIVE";
+        }
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public Long getId() {
+        return id;
     }
-    public Long getVolunteerId() {
-        return volunteerId;
+ 
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public void setVolunteerId(Long volunteerId) {
-        this.volunteerId = volunteerId;
-    }
-
+ 
     public Long getTaskId() {
         return taskId;
     }
-
+ 
     public void setTaskId(Long taskId) {
         this.taskId = taskId;
+    }
+ 
+    public Long getVolunteerId() {
+        return volunteerId;
+    }
+ 
+    public void setVolunteerId(Long volunteerId) {
+        this.volunteerId = volunteerId;
+    }
+ 
+    public String getStatus() {
+        return status;
+    }
+ 
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
