@@ -32,6 +32,10 @@ public class VolunteerProfile {
     public void setAvailability(String availability) {
         this.availability = availability;
     }
-    public 
-   
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
 }
