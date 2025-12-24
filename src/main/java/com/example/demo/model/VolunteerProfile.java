@@ -35,6 +35,6 @@ public class VolunteerProfile {
         return email;
     }
     public void setEmail(String email){
-        this.
+        this.email = email;
     }
 }
