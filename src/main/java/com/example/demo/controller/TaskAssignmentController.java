@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/task-assignments")
 public class TaskAssignmentController {
 
     private final TaskAssignmentService taskAssignmentService;
 
-    // constructor injection
     public TaskAssignmentController(TaskAssignmentService taskAssignmentService) {
         this.taskAssignmentService = taskAssignmentService;
     }

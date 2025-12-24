@@ -17,18 +17,12 @@ public class TaskRecordController {
     }
 
     @PostMapping
-    public TaskRecord createTask(@RequestBody TaskRecord task) {
-        return taskRecordService.createTask(task);
+    public TaskRecord createTask(@RequestBody TaskRecord record) {
+        return taskRecordService.createTask(record);
     }
 
-    @PutMapping("/{id}")
-    public TaskRecord updateTask(@PathVariable Long id,
-                                 @RequestBody TaskRecord task) {
-        return taskRecordService.updateTask(id, task);
-    }
-
-    @GetMapping("/open")
-    public List<TaskRecord> getOpenTasks() {
-        return taskRecordService.getOpenTasks();
+    @GetMapping
+    public List<TaskRecord> getAllTasks() {
+        return taskRecordService.getAllTasks();
     }
 }
