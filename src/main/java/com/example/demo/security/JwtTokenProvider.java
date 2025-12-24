@@ -20,8 +20,8 @@ public class JwtTokenProvider {
     private long jwtExpirationInMs;
 
     public JwtTokenProvider() {
-        this.jwtSecret = "secret";
-        this.jwtExpirationInMs = 604800000L;
+        this.jwtSecret = "VerySecretKeyForJwtDemoApplication123456";
+        this.jwtExpirationInMs = 3600000L;
     }
 
     public JwtTokenProvider(String jwtSecret, long jwtExpirationInMs) {
