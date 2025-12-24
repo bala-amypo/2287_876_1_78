@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface AssignmentEvaluationRecordRepository extends JpaRepository<AssignmentEvaluationRecord, Long> {
 
-    List<AssignmentEvaluationRecord> findByAssignmentId(Long assignmentId);
+    List<AssignmentEvaluationRecord> findByAssignment_Id(Long assignmentId);
+
 }
