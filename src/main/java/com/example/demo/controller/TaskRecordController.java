@@ -8,11 +8,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
-public class TaskController {
+public class TaskRecordController {
 
     private final TaskRecordService taskRecordService;
 
-    public TaskController(TaskRecordService taskRecordService) {
+    public TaskRecordController(TaskRecordService taskRecordService) {
         this.taskRecordService = taskRecordService;
     }
 
@@ -30,10 +30,5 @@ public class TaskController {
     @GetMapping("/open")
     public List<TaskRecord> getOpenTasks() {
         return taskRecordService.getOpenTasks();
-    }
-
-    @GetMapping
-    public List<TaskRecord> getAllTasks() {
-        return taskRecordService.getAllTasks();
     }
 }
