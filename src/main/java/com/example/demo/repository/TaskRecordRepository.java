@@ -8,3 +8,7 @@ public interface TaskRecordRepository extends JpaRepository<TaskRecord, Long> {
 
     List<TaskRecord> findByStatus(String status);
 }
+public interface TaskRecordRepository extends JpaRepository<TaskRecord, Long> {
+    java.util.Optional<TaskRecord> findByTaskCode(String code);
+    List<TaskRecord> findByStatus(String status);
+}

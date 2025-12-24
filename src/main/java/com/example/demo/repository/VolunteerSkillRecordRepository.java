@@ -17,3 +17,9 @@ public interface VolunteerSkillRecordRepository
             String skillLevel
     );
 }
+
+public interface VolunteerSkillRecordRepository extends JpaRepository<VolunteerSkillRecord, Long> {
+    List<VolunteerSkillRecord> findByVolunteerId(Long volunteerId);
+    List<VolunteerSkillRecord> findBySkillName(String skillName);
+    List<VolunteerSkillRecord> findBySkillNameAndSkillLevel(String skillName, String skillLevel);
+}
