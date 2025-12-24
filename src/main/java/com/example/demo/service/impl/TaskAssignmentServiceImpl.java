@@ -1,15 +1,15 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.service.TaskAssignmentRecordService;
+import com.example.demo.service.TaskAssignmentService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TaskAssignmentRecordServiceImpl
-        implements TaskAssignmentRecordService {
+public class TaskAssignmentServiceImpl
+        implements TaskAssignmentService {
 
     @Override
     public TaskAssignmentRecord assignTask(TaskAssignmentRecord record) {
