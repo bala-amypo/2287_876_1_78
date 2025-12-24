@@ -4,7 +4,6 @@ import com.example.demo.model.VolunteerProfile;
 import com.example.demo.repository.VolunteerProfileRepository;
 import com.example.demo.service.VolunteerProfileService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -12,18 +11,14 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
 
     private final VolunteerProfileRepository repository;
 
+    // Constructor injection
     public VolunteerProfileServiceImpl(VolunteerProfileRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public VolunteerProfile createVolunteer(VolunteerProfile volunteer) {
-        return repository.save(volunteer);
-    }
-
-    @Override
-    public VolunteerProfile getVolunteerById(Long id) {
-        return repository.findById(id).orElse(null);
+    public VolunteerProfile save(VolunteerProfile profile) {
+        return repository.save(profile);
     }
 
     @Override
@@ -32,13 +27,7 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
-    public VolunteerProfile updateVolunteer(Long id, VolunteerProfile volunteer) {
-        volunteer.setId(id);
-        return repository.save(volunteer);
-    }
-
-    @Override
-    public void deleteVolunteer(Long id) {
-        repository.deleteById(id);
+    public List<VolunteerProfile> getVolunteersBySkill(String skill) {
+        return repository.findBySkill(skill);
     }
 }

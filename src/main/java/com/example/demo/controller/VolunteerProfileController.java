@@ -10,24 +10,28 @@ import java.util.List;
 @RequestMapping("/volunteers")
 public class VolunteerProfileController {
 
-    private final VolunteerProfileService volunteerProfileService;
+    private final VolunteerProfileService service;
 
-    public VolunteerProfileController(VolunteerProfileService volunteerProfileService) {
-        this.volunteerProfileService = volunteerProfileService;
+    // Constructor injection
+    public VolunteerProfileController(VolunteerProfileService service) {
+        this.service = service;
     }
 
+    // Create volunteer
     @PostMapping
     public VolunteerProfile createVolunteer(@RequestBody VolunteerProfile profile) {
-        return volunteerProfileService.createVolunteer(profile);
+        return service.save(profile);
     }
 
-    @GetMapping("/{id}")
-    public VolunteerProfile getVolunteer(@PathVariable Long id) {
-        return volunteerProfileService.getVolunteerById(id);
-    }
-
+    // Get all volunteers
     @GetMapping
     public List<VolunteerProfile> getAllVolunteers() {
-        return volunteerProfileService.getAllVolunteers();
+        return service.getAllVolunteers();
+    }
+
+    // Get volunteers by skill
+    @GetMapping("/skill/{skill}")
+    public List<VolunteerProfile> getVolunteersBySkill(@PathVariable String skill) {
+        return service.getVolunteersBySkill(skill);
     }
 }
