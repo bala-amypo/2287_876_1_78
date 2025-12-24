@@ -7,38 +7,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+ @Service
+public class VolunteerProfileServiceImpl implements VolunteerProfileService {
 
-@Service
-public class VolunteerProfileServiceImpl {
-
-    private VolunteerProfileRepository volunteerProfileRepository;
-
-    public VolunteerProfileServiceImpl(VolunteerProfileRepository volunteerProfileRepository) {
-        this.volunteerProfileRepository = volunteerProfileRepository;
+    @Override
+    public VolunteerProfile registerVolunteer(RegisterRequest request) {
+        VolunteerProfile profile = new VolunteerProfile();
+        profile.setName(request.getName());
+        profile.setAvailability(request.getAvailability());
+        return profile;
     }
 
-    public VolunteerProfile createVolunteer(VolunteerProfile profile) {
-        if (volunteerProfileRepository.existsByVolunteerId(profile.getVolunteerId())) {
-            throw new BadRequestException("Volunteer ID already exists");
-        }
-        if (volunteerProfileRepository.existsByEmail(profile.getEmail())) {
-            throw new BadRequestException("Email already exists");
-        }
-        if (volunteerProfileRepository.existsByPhone(profile.getPhone())) {
-            throw new BadRequestException("Phone already exists");
-        }
-        return volunteerProfileRepository.save(profile);
-    }
-
-    public VolunteerProfile getVolunteerById(Long id) {
-        return volunteerProfileRepository.findById(id).orElseThrow(() -> new BadRequestException("Volunteer not found"));
-    }
-
-    public List<VolunteerProfile> getAllVolunteers() {
-        return volunteerProfileRepository.findAll();
-    }
-
-    public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
-        return volunteerProfileRepository.findByVolunteerId(volunteerId);
+    @Override
+    public VolunteerProfile updateAvailability(Long id, String availability) {
+        VolunteerProfile profile = new VolunteerProfile();
+        profile.setId(id);
+        profile.setAvailability(availability);
+        return profile;
     }
 }

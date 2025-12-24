@@ -12,3 +12,4 @@ public class AvailabilityUpdateRequest {
         this.availability = availability;
     }
 }
+
