@@ -5,11 +5,7 @@ import java.util.List;
 
 public interface TaskRecordService {
 
-    TaskRecord createTask(TaskRecord task);
+    TaskRecord updateTask(Long id, TaskRecord record);
 
-    TaskRecord getTaskById(Long id);
-
-    List<TaskRecord> getAllTasks();
-
-    List<TaskRecord> getTasksByStatus(String status);
+    List<TaskRecord> getOpenTasks();
 }
