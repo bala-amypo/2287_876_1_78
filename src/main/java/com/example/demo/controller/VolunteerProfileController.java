@@ -17,20 +17,27 @@ public class VolunteerProfileController {
         this.volunteerProfileService = volunteerProfileService;
     }
 
+    // ✅ REGISTER VOLUNTEER
     @PostMapping
-    public ResponseEntity<VolunteerProfile> register(@RequestBody RegisterRequest request) {
-       volunteerProfileService.registerVolunteer(request);
-       VolunteerProfile savedProfile = service.register(request);
-return ResponseEntity.ok(savedProfile);
+    public ResponseEntity<VolunteerProfile> register(
+            @RequestBody RegisterRequest request) {
 
+        VolunteerProfile savedProfile =
+                volunteerProfileService.registerVolunteer(request);
 
+        return ResponseEntity.ok(savedProfile);
     }
 
+    // ✅ UPDATE AVAILABILITY
     @PatchMapping("/{id}/availability")
-    public ResponseEntity<VolunteerProfile> updateAvailability(@PathVariable Long id,
-                                                               @RequestBody AvailabilityUpdateRequest request) {
-        volunteerProfileService.registerVolunteer(request);
-        return ResponseEntity.ok("Registered Successfully");
+    public ResponseEntity<VolunteerProfile> updateAvailability(
+            @PathVariable Long id,
+            @RequestBody AvailabilityUpdateRequest request) {
 
+        VolunteerProfile updatedProfile =
+                volunteerProfileService.updateAvailability(
+                        id, request.getAvailability());
+
+        return ResponseEntity.ok(updatedProfile);
     }
 }
