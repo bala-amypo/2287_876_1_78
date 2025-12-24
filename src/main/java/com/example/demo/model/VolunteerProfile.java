@@ -7,7 +7,7 @@ public class VolunteerProfile {
     private Long id;
     private String name;
     private String availability;
-    private String email;
+
     public Long getId() {
         return id;
     }
@@ -31,10 +31,5 @@ public class VolunteerProfile {
     public void setAvailability(String availability) {
         this.availability = availability;
     }
-    public String getEmail(){
-        return email;
-    }
-    public void setEmail(String email){
-        this.email = email;
-    }
+   
 }

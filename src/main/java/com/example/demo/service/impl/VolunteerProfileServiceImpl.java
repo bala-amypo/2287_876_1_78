@@ -19,7 +19,7 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     public VolunteerProfile registerVolunteer(RegisterRequest request) {
         VolunteerProfile profile = new VolunteerProfile();
         profile.setName(request.getName());
-        profile.setEmail(request.getEmail());
+      
         profile.setAvailability(request.getAvailability());
         return repository.save(profile);
     }
