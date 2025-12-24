@@ -1,18 +1,18 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.service.TaskAssignmentService;
+import com.example.demo.service.TaskAssignmentRecordService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/assignments")
-public class TaskAssignmentController {
+public class TaskAssignmentRecordController {
 
-    private final TaskAssignmentService taskAssignmentService;
+    private final TaskAssignmentRecordService taskAssignmentRecordService;
 
-    public TaskAssignmentController(TaskAssignmentService taskAssignmentService) {
+    public TaskAssignmentRecordController(TaskAssignmentService taskAssignmentService) {
         this.taskAssignmentService = taskAssignmentService;
     }
 
