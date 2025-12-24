@@ -10,25 +10,19 @@ import java.util.List;
 @Service
 public class TaskRecordServiceImpl implements TaskRecordService {
 
-    private final TaskRecordRepository repository;
+    private final TaskRecordRepository taskRecordRepository;
 
-    public TaskRecordServiceImpl(TaskRecordRepository repository) {
-        this.repository = repository;
+    public TaskRecordServiceImpl(TaskRecordRepository taskRecordRepository) {
+        this.taskRecordRepository = taskRecordRepository;
     }
 
     @Override
-    public TaskRecord createTask(TaskRecord task) {
-        return repository.save(task);
+    public TaskRecord createTask(TaskRecord record) {
+        return taskRecordRepository.save(record);
     }
 
     @Override
-    public TaskRecord updateTask(Long id, TaskRecord task) {
-        task.setId(id);
-        return repository.save(task);
-    }
-
-    @Override
-    public List<TaskRecord> getOpenTasks() {
-        return repository.findByStatus("OPEN");
+    public List<TaskRecord> getAllTasks() {
+        return taskRecordRepository.findAll();
     }
 }
