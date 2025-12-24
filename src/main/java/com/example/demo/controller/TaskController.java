@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.service.TaskService;
+import com.example.demo.service.TaskRecordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private final TaskService taskService;
+    private final TaskRecordService taskService;
 
     // ✅ Constructor Injection (REQUIRED)
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskRecordService taskService) {
         this.taskService = taskService;
     }
 
