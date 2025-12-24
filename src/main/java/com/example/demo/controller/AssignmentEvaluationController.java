@@ -5,7 +5,17 @@ import com.example.demo.model.AssignmentEvaluationRecord;
 import com.example.demo.service.AssignmentEvaluationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@PostMapping
+
+@RestController
+@RequestMapping("/evaluations")
+public class AssignmentEvaluationController {
+
+    private final AssignmentEvaluationService assignmentEvaluationService;
+
+    public AssignmentEvaluationController(AssignmentEvaluationService assignmentEvaluationService) {
+        this.assignmentEvaluationService = assignmentEvaluationService;
+    }
+    @PostMapping
 public ResponseEntity<AssignmentEvaluationRecord> evaluate(
         @RequestBody EvaluationRequest request) {
 
@@ -22,4 +32,8 @@ public ResponseEntity<AssignmentEvaluationRecord> evaluate(
     return ResponseEntity.ok(
             assignmentEvaluationService.evaluateAssignment(entity)
     );
+}
+
+
+
 }

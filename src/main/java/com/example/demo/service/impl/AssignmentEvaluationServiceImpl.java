@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationService {
+public class AssignmentEvaluationServiceImpl
+        implements AssignmentEvaluationService {
 
-    private AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository;
+    private final AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository;
 
-    public AssignmentEvaluationServiceImpl(AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository) {
+    public AssignmentEvaluationServiceImpl(
+            AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository) {
         this.assignmentEvaluationRecordRepository = assignmentEvaluationRecordRepository;
     }
 
@@ -23,6 +25,7 @@ public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationServ
 
     @Override
     public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(Long assignmentId) {
-        return assignmentEvaluationRecordRepository.findByAssignmentId(assignmentId);
+        // ✅ CORRECT METHOD CALL
+        return assignmentEvaluationRecordRepository.findByAssignment_Id(assignmentId);
     }
 }
