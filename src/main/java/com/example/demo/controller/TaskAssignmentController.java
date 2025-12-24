@@ -5,18 +5,17 @@ import com.example.demo.service.TaskAssignmentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskAssignmentController {
 
     private final TaskAssignmentService taskAssignmentService;
 
-    // ✅ constructor injection
+    // constructor injection
     public TaskAssignmentController(TaskAssignmentService taskAssignmentService) {
         this.taskAssignmentService = taskAssignmentService;
     }
-}
-
 
     @PostMapping
     public TaskAssignmentRecord assignTask(
