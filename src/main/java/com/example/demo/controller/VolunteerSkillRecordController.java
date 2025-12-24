@@ -1,23 +1,23 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.VolunteerSkillRecord;
-import com.example.demo.service.VolunteerSkillRecordService;
+import com.example.demo.service.VolunteerSkillService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/volunteer-skills")
-public class VolunteerSkillRecordController {
+public class VolunteerSkillController {
 
-    private final VolunteerSkillRecordService volunteerSkillRecordService;
+    private final VolunteerSkillService volunteerSkillService;
 
-    public VolunteerSkillRecordController(
-            VolunteerSkillRecordService volunteerSkillRecordService) {
-        this.volunteerSkillRecordService = volunteerSkillRecordService;
+    public VolunteerSkillController(
+            VolunteerSkillService volunteerSkillService) {
+        this.volunteerSkillService = volunteerSkillService;
     }
 
     @PostMapping
     public VolunteerSkillRecord addSkill(
             @RequestBody VolunteerSkillRecord record) {
-        return volunteerSkillRecordService.addOrUpdateSkill(record);
+        return volunteerSkillService.addOrUpdateSkill(record);
     }
 }
