@@ -12,16 +12,7 @@ public class AssignmentEvaluationRecord {
     private Integer score;
     private String remarks;
 
-    @Entity
-public class AssignmentEvaluationRecord {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @ManyToOne
-    private Assignment assignment;   // 👈 idhu dhaan irukku
-}
+ 
 
 
     public Long getId() { return id; }
