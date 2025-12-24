@@ -7,13 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TaskAssignmentRecordRepository
-        extends JpaRepository<TaskAssignmentRecord, Long> {
 
-    List<TaskAssignmentRecord> findByTaskId(Long taskId);
-
-    List<TaskAssignmentRecord> findByVolunteerId(Long volunteerId);
-}
 public interface TaskAssignmentRecordRepository extends JpaRepository<TaskAssignmentRecord, Long> {
     boolean existsByTaskIdAndStatus(Long taskId, String status);
     List<TaskAssignmentRecord> findByTaskId(Long taskId);
