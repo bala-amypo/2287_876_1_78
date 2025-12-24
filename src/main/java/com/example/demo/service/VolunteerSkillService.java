@@ -3,9 +3,14 @@ package com.example.demo.service;
 import com.example.demo.model.VolunteerSkillRecord;
 import java.util.List;
 
-public interface VolunteerSkillService {
+public interface VolunteerSkillRecordService {
 
-    VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill);
+    VolunteerSkillRecord addSkill(VolunteerSkillRecord record);
 
     List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId);
+
+    List<VolunteerSkillRecord> findBySkillAndLevel(
+            String skill,
+            String level
+    );
 }
