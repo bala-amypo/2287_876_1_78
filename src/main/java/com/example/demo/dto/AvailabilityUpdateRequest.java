@@ -2,13 +2,25 @@ package com.example.demo.dto;
 
 public class AvailabilityUpdateRequest {
 
-    private String availability;
+    private Long volunteerId;
+    private String availabilityStatus;
 
-    public String getAvailability() {
-        return availability;
+    public AvailabilityUpdateRequest() {
     }
 
-    public void setAvailability(String availability) {
-        this.availability = availability;
+    public Long getVolunteerId() {
+        return volunteerId;
+    }
+ 
+    public void setVolunteerId(Long volunteerId) {
+        this.volunteerId = volunteerId;
+    }
+ 
+    public String getAvailabilityStatus() {
+        return availabilityStatus;
+    }
+ 
+    public void setAvailabilityStatus(String availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
     }
 }
