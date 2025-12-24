@@ -1,28 +1,33 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.VolunteerSkillRecord;
-import com.example.demo.service.VolunteerSkillService;
+import com.example.demo.model.VolunteerProfile;
+import com.example.demo.service.VolunteerProfileService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/skills")
-public class VolunteerSkillController {
+@RequestMapping("/volunteers")
+public class VolunteerProfileController {
 
-    private final VolunteerSkillService volunteerSkillService;
+    private final VolunteerProfileService volunteerProfileService;
 
-    public VolunteerSkillController(VolunteerSkillService volunteerSkillService) {
-        this.volunteerSkillService = volunteerSkillService;
+    public VolunteerProfileController(VolunteerProfileService volunteerProfileService) {
+        this.volunteerProfileService = volunteerProfileService;
     }
 
     @PostMapping
-    public VolunteerSkillRecord addOrUpdateSkill(@RequestBody VolunteerSkillRecord skill) {
-        return volunteerSkillService.addOrUpdateSkill(skill);
+    public VolunteerProfile createVolunteer(@RequestBody VolunteerProfile profile) {
+        return volunteerProfileService.createVolunteer(profile);
     }
 
-    @GetMapping("/volunteer/{volunteerId}")
-    public List<VolunteerSkillRecord> getSkills(@PathVariable Long volunteerId) {
-        return volunteerSkillService.getSkillsByVolunteer(volunteerId);
+    @GetMapping("/{id}")
+    public VolunteerProfile getVolunteer(@PathVariable Long id) {
+        return volunteerProfileService.getVolunteerById(id);
+    }
+
+    @GetMapping
+    public List<VolunteerProfile> getAllVolunteers() {
+        return volunteerProfileService.getAllVolunteers();
     }
 }

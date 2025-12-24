@@ -1,48 +1,29 @@
 package com.example.demo.controller;
 
-import com.example.demo.security.CustomUserDetailsService;
-import com.example.demo.security.JwtTokenProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.example.demo.model.AssignmentEvaluationRecord;
+import com.example.demo.service.AssignmentEvaluationService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.Map;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/auth")
-public class AuthController {
+@RequestMapping("/evaluations")
+public class AssignmentEvaluationController {
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private final AssignmentEvaluationService assignmentEvaluationService;
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @PostMapping("/register")
-    public Map<String, Object> register(@RequestBody Map<String, String> request) {
-        String fullName = request.get("fullName");
-        String email = request.get("email");
-        String password = passwordEncoder.encode(request.get("password"));
-        String role = request.get("role");
-        return customUserDetailsService.registerUser(fullName, email, password, role);
+    public AssignmentEvaluationController(AssignmentEvaluationService assignmentEvaluationService) {
+        this.assignmentEvaluationService = assignmentEvaluationService;
     }
 
-    @PostMapping("/login")
-    public String login(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        String password = request.get("password");
-        // In a real app, validate password here
-        Authentication auth = new UsernamePasswordAuthenticationToken(email, password, Collections.emptyList());
-        Map<String, Object> user = customUserDetailsService.getUserByEmail(email);
-        if (user != null) {
-            return jwtTokenProvider.generateToken(auth, (Long) user.get("userId"), (String) user.get("role"));
-        }
-        throw new RuntimeException("Invalid credentials");
+    @PostMapping
+    public AssignmentEvaluationRecord evaluate(@RequestBody AssignmentEvaluationRecord record) {
+        return assignmentEvaluationService.evaluateAssignment(record);
+    }
+
+    @GetMapping("/{assignmentId}")
+    public List<AssignmentEvaluationRecord> getByAssignment(
+            @PathVariable Long assignmentId) {
+        return assignmentEvaluationService.getEvaluationsByAssignment(assignmentId);
     }
 }
