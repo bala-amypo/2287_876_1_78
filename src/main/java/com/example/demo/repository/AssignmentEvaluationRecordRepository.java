@@ -12,3 +12,7 @@ public interface AssignmentEvaluationRecordRepository
 
     List<AssignmentEvaluationRecord> findByAssignmentId(Long assignmentId);
 }
+
+public interface AssignmentEvaluationRecordRepository extends JpaRepository<AssignmentEvaluationRecord, Long> {
+    List<AssignmentEvaluationRecord> findByAssignmentId(Long assignmentId);
+}
