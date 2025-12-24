@@ -12,27 +12,27 @@ public class TaskAssignmentRecordController {
 
     private final TaskAssignmentRecordService taskAssignmentRecordService;
 
-    public TaskAssignmentRecordController(TaskAssignmentService taskAssignmentService) {
-        this.taskAssignmentService = taskAssignmentService;
+    public TaskAssignmentRecordController(TaskAssignmentRecordService taskAssignmentRecordService) {
+        this.taskAssignmentRecordService = taskAssignmentRecordService;
     }
 
     @PostMapping("/{taskId}")
     public TaskAssignmentRecord assignTask(@PathVariable Long taskId) {
-        return taskAssignmentService.assignTask(taskId);
+        return taskAssignmentRecordService.assignTask(taskId);
     }
 
     @GetMapping
     public List<TaskAssignmentRecord> getAllAssignments() {
-        return taskAssignmentService.getAllAssignments();
+        return taskAssignmentRecordService.getAllAssignments();
     }
 
     @GetMapping("/task/{taskId}")
     public List<TaskAssignmentRecord> getByTask(@PathVariable Long taskId) {
-        return taskAssignmentService.getAssignmentsByTask(taskId);
+        return taskAssignmentRecordService.getAssignmentsByTask(taskId);
     }
 
     @GetMapping("/volunteer/{volunteerId}")
     public List<TaskAssignmentRecord> getByVolunteer(@PathVariable Long volunteerId) {
-        return taskAssignmentService.getAssignmentsByVolunteer(volunteerId);
+        return taskAssignmentRecordService.getAssignmentsByVolunteer(volunteerId);
     }
 }
