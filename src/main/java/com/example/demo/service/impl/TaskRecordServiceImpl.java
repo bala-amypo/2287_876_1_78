@@ -5,6 +5,7 @@ import com.example.demo.service.TaskRecordService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+
 @Service
 public class TaskRecordServiceImpl implements TaskRecordService {
 
@@ -12,6 +13,7 @@ public class TaskRecordServiceImpl implements TaskRecordService {
     public TaskAssignmentRecord assignTask(Long taskId) {
         TaskAssignmentRecord record = new TaskAssignmentRecord();
         record.setTaskId(taskId);
+        record.setVolunteerId(1L); // dummy for test
         record.setAssignedAt(LocalDateTime.now());
         return record;
     }
