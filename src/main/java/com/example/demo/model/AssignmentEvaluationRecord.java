@@ -1,33 +1,70 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "assignment_evaluation_records")
 public class AssignmentEvaluationRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer score;
-    private String remarks;
+    @Column(nullable = false)
+    private Long assignmentId;
 
-    public AssignmentEvaluationRecord() {
+    @Column(nullable = false)
+    private Integer rating;
+
+    private String feedback;
+
+    @Column(updatable = false)
+    private LocalDateTime evaluatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        evaluatedAt = LocalDateTime.now();
     }
 
-    // ✅ REQUIRED CONSTRUCTOR
-    public AssignmentEvaluationRecord(Long id, Integer score, String remarks) {
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
-        this.score = score;
-        this.remarks = remarks;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getAssignmentId() {
+        return assignmentId;
+    }
 
-    public Integer getScore() { return score; }
-    public void setScore(Integer score) { this.score = score; }
+    public void setAssignmentId(Long assignmentId) {
+        this.assignmentId = assignmentId;
+    }
 
-    public String getRemarks() { return remarks; }
-    public void setRemarks(String remarks) { this.remarks = remarks; }
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    public LocalDateTime getEvaluatedAt() {
+        return evaluatedAt;
+    }
+
+    public void setEvaluatedAt(LocalDateTime evaluatedAt) {
+        this.evaluatedAt = evaluatedAt;
+    }
 }
