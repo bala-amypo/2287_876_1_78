@@ -11,21 +11,22 @@ import java.util.List;
 public class AssignmentEvaluationServiceImpl
         implements AssignmentEvaluationService {
 
-    private final AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository;
+    private final AssignmentEvaluationRecordRepository repository;
 
     public AssignmentEvaluationServiceImpl(
-            AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository) {
-        this.assignmentEvaluationRecordRepository = assignmentEvaluationRecordRepository;
+            AssignmentEvaluationRecordRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord evaluation) {
-        return assignmentEvaluationRecordRepository.save(evaluation);
+    public AssignmentEvaluationRecord evaluateAssignment(
+            AssignmentEvaluationRecord evaluation) {
+        return repository.save(evaluation);
     }
 
     @Override
-    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(Long assignmentId) {
-        // ✅ CORRECT METHOD CALL
-        return assignmentEvaluationRecordRepository.findByAssignment_Id(assignmentId);
+    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(
+            Long assignmentId) {
+        return repository.findByAssignmentId(assignmentId);
     }
 }
