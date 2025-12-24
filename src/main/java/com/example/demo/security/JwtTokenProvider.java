@@ -16,4 +16,12 @@ public class JwtTokenProvider {
                                 String role) {
         return "dummy-token";
     }
+    public boolean validateToken(String token) {
+    return true;
+}
+
+public String getUsernameFromToken(String token) {
+    return "testuser";
+}
+
 }
