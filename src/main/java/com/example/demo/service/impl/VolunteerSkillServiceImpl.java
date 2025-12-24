@@ -1,12 +1,12 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.VolunteerSkillRecord;
-import com.example.demo.service.VolunteerSkillRecordService;
+import com.example.demo.service.VolunteerSkillService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VolunteerSkillRecordServiceImpl
-        implements VolunteerSkillRecordService {
+public class VolunteerSkillServiceImpl
+        implements VolunteerSkillService {
 
     @Override
     public VolunteerSkillRecord addOrUpdateSkill(
