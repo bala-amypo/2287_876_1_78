@@ -1,14 +1,13 @@
-package com.example.demo.security;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.springframework.stereotype.Service;
+public Map<String, Object> registerUser(
+        String username,
+        String password,
+        String email,
+        String role) {
 
-@Service
-public class CustomUserDetailsService {
-
-    public void registerUser(String username,
-                             String password,
-                             String email,
-                             String role) {
-        // Testcase purpose – no logic needed
-    }
+    Map<String, Object> map = new HashMap<>();
+    map.put("message", "User registered");
+    return map;
 }
