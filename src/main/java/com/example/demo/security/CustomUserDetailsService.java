@@ -1,38 +1,76 @@
 package com.example.demo.security;
 
-import org.springframework.security.core.userdetails.*;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
-public class CustomUserDetailsService
-        implements UserDetailsService {
+import java.util.Date;
+import java.util.Map;
 
-    private final Map<String, UserDetails> users = new HashMap<>();
-    private final Map<String, Map<String, Object>> meta = new HashMap<>();
-    private final AtomicLong idGen = new AtomicLong(1);
+@Component
+public class JwtTokenProvider {
 
-    public Map<String, Object> registerUser(
-            String name, String email, String pwd, String role) {
+    private String jwtSecret;
 
-        Long id = idGen.getAndIncrement();
-        UserDetails u = User.withUsername(email)
-                .password(pwd)
-                .roles(role)
-                .build();
+    private long jwtExpirationInMs;
 
-        users.put(email, u);
-
-        Map<String, Object> m = new HashMap<>();
-        m.put("userId", id);
-        m.put("role", role);
-        meta.put(email, m);
-        return m;
+    public JwtTokenProvider() {
+        this.jwtSecret = "secret";
+        this.jwtExpirationInMs = 604800000L;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) {
-        if (!users.containsKey(email))
-            throw new UsernameNotFoundException("User not found");
-        return users.get(email);
+    public JwtTokenProvider(String jwtSecret, long jwtExpirationInMs) {
+        this.jwtSecret = jwtSecret;
+        this.jwtExpirationInMs = jwtExpirationInMs;
+    }
+
+    public String generateToken(Authentication authentication, Long userId, String role) {
+        String username = authentication.getName();
+        Date expiryDate = new Date(System.currentTimeMillis() + jwtExpirationInMs);
+
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .claim("userId", userId)
+                .claim("role", role)
+                .claim("email", username)
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+
+    public String getUsernameFromToken(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        Claims claims = Jwts.parser()
+                .setSigningKey(key)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getSubject();
+    }
+
+    public boolean validateToken(String authToken) {
+        try {
+            SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+            Jwts.parser().setSigningKey(key).parseClaimsJws(authToken);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public Map<String, Object> getAllClaims(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        Claims claims = Jwts.parser()
+                .setSigningKey(key)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims;
     }
 }
