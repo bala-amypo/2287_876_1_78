@@ -1,43 +1,28 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AvailabilityUpdateRequest;
-import com.example.demo.dto.RegisterRequest;
-import com.example.demo.model.VolunteerProfile;
-import com.example.demo.service.VolunteerProfileService;
-import org.springframework.http.ResponseEntity;
+import com.example.demo.model.VolunteerSkillRecord;
+import com.example.demo.service.VolunteerSkillService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/volunteers")
-public class VolunteerProfileController {
+@RequestMapping("/skills")
+public class VolunteerSkillController {
 
-    private final VolunteerProfileService volunteerProfileService;
+    private final VolunteerSkillService volunteerSkillService;
 
-    public VolunteerProfileController(VolunteerProfileService volunteerProfileService) {
-        this.volunteerProfileService = volunteerProfileService;
+    public VolunteerSkillController(VolunteerSkillService volunteerSkillService) {
+        this.volunteerSkillService = volunteerSkillService;
     }
 
-    // ✅ REGISTER VOLUNTEER
     @PostMapping
-    public ResponseEntity<VolunteerProfile> register(
-            @RequestBody RegisterRequest request) {
-
-        VolunteerProfile savedProfile =
-                volunteerProfileService.registerVolunteer(request);
-
-        return ResponseEntity.ok(savedProfile);
+    public VolunteerSkillRecord addOrUpdateSkill(@RequestBody VolunteerSkillRecord skill) {
+        return volunteerSkillService.addOrUpdateSkill(skill);
     }
 
-    // ✅ UPDATE AVAILABILITY
-    @PatchMapping("/{id}/availability")
-    public ResponseEntity<VolunteerProfile> updateAvailability(
-            @PathVariable Long id,
-            @RequestBody AvailabilityUpdateRequest request) {
-
-        VolunteerProfile updated =
-                volunteerProfileService.updateAvailability(
-                        id, request.getAvailability());
-
-        return ResponseEntity.ok(updated);
+    @GetMapping("/volunteer/{volunteerId}")
+    public List<VolunteerSkillRecord> getSkills(@PathVariable Long volunteerId) {
+        return volunteerSkillService.getSkillsByVolunteer(volunteerId);
     }
 }

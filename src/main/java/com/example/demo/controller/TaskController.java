@@ -1,24 +1,33 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.service.TaskRecordService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.model.VolunteerProfile;
+import com.example.demo.service.VolunteerProfileService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
-public class TaskController {
+@RequestMapping("/volunteers")
+public class VolunteerProfileController {
 
-    private final TaskRecordService taskRecordService;
+    private final VolunteerProfileService volunteerProfileService;
 
-    public TaskController(TaskRecordService taskRecordService) {
-        this.taskRecordService = taskRecordService;
+    public VolunteerProfileController(VolunteerProfileService volunteerProfileService) {
+        this.volunteerProfileService = volunteerProfileService;
     }
 
-    @PostMapping("/{id}/assign")
-    public TaskAssignmentRecord assign(@PathVariable Long id) {
-        return taskRecordService.assignTask(id);
+    @PostMapping
+    public VolunteerProfile createVolunteer(@RequestBody VolunteerProfile profile) {
+        return volunteerProfileService.createVolunteer(profile);
+    }
+
+    @GetMapping("/{id}")
+    public VolunteerProfile getVolunteer(@PathVariable Long id) {
+        return volunteerProfileService.getVolunteerById(id);
+    }
+
+    @GetMapping
+    public List<VolunteerProfile> getAllVolunteers() {
+        return volunteerProfileService.getAllVolunteers();
     }
 }
