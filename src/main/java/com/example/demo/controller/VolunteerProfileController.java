@@ -20,7 +20,9 @@ public class VolunteerProfileController {
     @PostMapping
     public ResponseEntity<VolunteerProfile> register(@RequestBody RegisterRequest request) {
        volunteerProfileService.registerVolunteer(request);
-       return ResponseEntity.ok("Registered Successfully");
+       VolunteerProfile savedProfile = service.register(request);
+return ResponseEntity.ok(savedProfile);
+
 
     }
 
