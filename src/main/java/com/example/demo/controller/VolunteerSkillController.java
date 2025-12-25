@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.VolunteerSkill;
+import com.example.demo.model.VolunteerSkillRecord;
 import com.example.demo.service.VolunteerSkillService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,20 +18,20 @@ public class VolunteerSkillController {
     }
 
     @PostMapping
-    public VolunteerSkill addSkill(
-            @RequestBody VolunteerSkill skill) {
+    public VolunteerSkillRecord addSkill(
+            @RequestBody VolunteerSkillRecord skill) {
         return service.addSkill(skill);
     }
 
     @GetMapping("/volunteer/{volunteerId}")
-    public List<VolunteerSkill> getSkillsByVolunteer(
+    public List<VolunteerSkillRecord> getSkillsByVolunteer(
             @PathVariable Long volunteerId) {
         return service.getSkillsByVolunteer(volunteerId);
     }
 
     @GetMapping("/skill/{skillName}")
-    public List<VolunteerSkill> getSkillsByName(
+    public List<VolunteerSkillRecord> getSkillsBySkill(
             @PathVariable String skillName) {
-        return service.getSkillsByName(skillName);
+        return service.getSkillsBySkill(skillName);
     }
 }

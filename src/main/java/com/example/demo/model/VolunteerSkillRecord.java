@@ -3,26 +3,30 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-public class VolunteerSkill {
+public class VolunteerSkillRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long volunteerId;
     private String skillName;
-    private int skillLevel;
+    private String skillLevel;
 
-    @ManyToOne
-    @JoinColumn(name = "volunteer_id")
-    private VolunteerProfile volunteerProfile;
-
-    public VolunteerSkill() {}
+    public VolunteerSkillRecord() {}
 
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVolunteerId() {
+        return volunteerId;
+    }
+    public void setVolunteerId(Long volunteerId) {
+        this.volunteerId = volunteerId;
     }
 
     public String getSkillName() {
@@ -32,17 +36,10 @@ public class VolunteerSkill {
         this.skillName = skillName;
     }
 
-    public int getSkillLevel() {
+    public String getSkillLevel() {
         return skillLevel;
     }
-    public void setSkillLevel(int skillLevel) {
+    public void setSkillLevel(String skillLevel) {
         this.skillLevel = skillLevel;
-    }
-
-    public VolunteerProfile getVolunteerProfile() {
-        return volunteerProfile;
-    }
-    public void setVolunteerProfile(VolunteerProfile volunteerProfile) {
-        this.volunteerProfile = volunteerProfile;
     }
 }
