@@ -1,8 +1,9 @@
 package com.example.demo.model;
 
 import java.util.Objects;
-
+@Entity
 public class VolunteerProfile {
+    @Id
     private Long id; // for DB auto-generated ID
     private String volunteerId; // String, as tests expect
     private String fullName;

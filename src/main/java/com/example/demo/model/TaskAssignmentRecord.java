@@ -1,6 +1,7 @@
 package com.example.demo.model;
-
+@Entity
 public class TaskAssignmentRecord {
+    @Id
     private Long id;
     private Long taskId;
     private Long volunteerId;
