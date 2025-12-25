@@ -14,4 +14,6 @@ public interface TaskAssignmentRecordRepository extends JpaRepository<TaskAssign
     List<TaskAssignmentRecord> findByTaskId(Long taskId);
 
     List<TaskAssignmentRecord> findByVolunteerId(Long volunteerId);
+    
+    List<VolunteerProfile> findByAvailabilityStatus(String status);
 }
