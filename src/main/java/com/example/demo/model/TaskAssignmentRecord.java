@@ -1,23 +1,38 @@
 package com.example.demo.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 @Entity
 public class TaskAssignmentRecord {
+
     @Id
-    private Long id;
-    private Long taskId;
+    private Long taskId;       // matches test expectation
     private Long volunteerId;
-    private String status = "ACTIVE"; // default
+    private String status;
 
-    public TaskAssignmentRecord() {}
+    // Getters and Setters
+    public Long getTaskId() {
+        return taskId;
+    }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
+    }
 
-    public Long getTaskId() { return taskId; }
-    public void setTaskId(Long taskId) { this.taskId = taskId; }
+    public Long getVolunteerId() {
+        return volunteerId;
+    }
 
-    public Long getVolunteerId() { return volunteerId; }
-    public void setVolunteerId(Long volunteerId) { this.volunteerId = volunteerId; }
+    public void setVolunteerId(Long volunteerId) {
+        this.volunteerId = volunteerId;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
