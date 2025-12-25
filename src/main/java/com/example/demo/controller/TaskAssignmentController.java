@@ -3,27 +3,35 @@ package com.example.demo.controller;
 import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.service.TaskAssignmentService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/task-assignments")
 public class TaskAssignmentController {
 
-    private final TaskAssignmentService taskAssignmentService;
+    private final TaskAssignmentService assignmentService;
 
-    public TaskAssignmentController(TaskAssignmentService taskAssignmentService) {
-        this.taskAssignmentService = taskAssignmentService;
+    public TaskAssignmentController(TaskAssignmentService assignmentService) {
+        this.assignmentService = assignmentService;
     }
 
-    @PostMapping
-    public TaskAssignmentRecord assignTask(
-            @RequestBody TaskAssignmentRecord record) {
-        return taskAssignmentService.assignTask(record);
+    @PostMapping("/{taskId}")
+    public TaskAssignmentRecord assignTask(@PathVariable Long taskId) {
+        return assignmentService.assignTask(taskId);
     }
 
     @GetMapping
     public List<TaskAssignmentRecord> getAllAssignments() {
-        return taskAssignmentService.getAllAssignments();
+        return assignmentService.getAllAssignments();
+    }
+
+    @GetMapping("/task/{taskId}")
+    public List<TaskAssignmentRecord> getAssignmentsByTask(@PathVariable Long taskId) {
+        return assignmentService.getAssignmentsByTask(taskId);
+    }
+
+    @GetMapping("/volunteer/{volunteerId}")
+    public List<TaskAssignmentRecord> getAssignmentsByVolunteer(@PathVariable Long volunteerId) {
+        return assignmentService.getAssignmentsByVolunteer(volunteerId);
     }
 }
