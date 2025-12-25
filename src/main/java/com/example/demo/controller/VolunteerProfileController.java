@@ -11,29 +11,39 @@ import java.util.Optional;
 @RequestMapping("/volunteers")
 public class VolunteerProfileController {
 
-    private final VolunteerProfileService volunteerService;
+    private final VolunteerProfileService service;
 
-    public VolunteerProfileController(VolunteerProfileService volunteerService) {
-        this.volunteerService = volunteerService;
+    public VolunteerProfileController(
+            VolunteerProfileService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public VolunteerProfile createVolunteer(@RequestBody VolunteerProfile profile) {
-        return volunteerService.createVolunteer(profile);
+    public VolunteerProfile createVolunteer(
+            @RequestBody VolunteerProfile volunteer) {
+        return service.createVolunteer(volunteer);
     }
 
-    @GetMapping("/{id}")
-    public VolunteerProfile getVolunteerById(@PathVariable Long id) {
-        return volunteerService.getVolunteerById(id);
+    @PutMapping("/{id}")
+    public VolunteerProfile updateVolunteer(
+            @PathVariable Long id,
+            @RequestBody VolunteerProfile volunteer) {
+        return service.updateVolunteer(id, volunteer);
     }
 
     @GetMapping
     public List<VolunteerProfile> getAllVolunteers() {
-        return volunteerService.getAllVolunteers();
+        return service.getAllVolunteers();
     }
 
-    @GetMapping("/lookup/{volunteerId}")
-    public Optional<VolunteerProfile> findByVolunteerId(@PathVariable String volunteerId) {
-        return volunteerService.findByVolunteerId(volunteerId);
+    @GetMapping("/available")
+    public List<VolunteerProfile> getAvailableVolunteers() {
+        return service.getAvailableVolunteers();
+    }
+
+    @GetMapping("/code/{volunteerCode}")
+    public Optional<VolunteerProfile> getByCode(
+            @PathVariable String volunteerCode) {
+        return service.getByVolunteerCode(volunteerCode);
     }
 }

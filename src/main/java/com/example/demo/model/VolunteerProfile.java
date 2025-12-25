@@ -9,35 +9,37 @@ public class VolunteerProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String volunteerId;
-
-    @Column(unique = true)
-    private String email;
-
-    @Column(unique = true)
-    private String phone;
-
-    private String fullName;
-    private String availabilityStatus; // e.g., AVAILABLE, BUSY, etc.
+    private String volunteerCode;
+    private String volunteerName;
+    private String availabilityStatus = "AVAILABLE"; // default
 
     public VolunteerProfile() {}
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getVolunteerId() { return volunteerId; }
-    public void setVolunteerId(String volunteerId) { this.volunteerId = volunteerId; }
+    public String getVolunteerCode() {
+        return volunteerCode;
+    }
+    public void setVolunteerCode(String volunteerCode) {
+        this.volunteerCode = volunteerCode;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getVolunteerName() {
+        return volunteerName;
+    }
+    public void setVolunteerName(String volunteerName) {
+        this.volunteerName = volunteerName;
+    }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
-
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
-
-    public String getAvailabilityStatus() { return availabilityStatus; }
-    public void setAvailabilityStatus(String availabilityStatus) { this.availabilityStatus = availabilityStatus; }
+    public String getAvailabilityStatus() {
+        return availabilityStatus;
+    }
+    public void setAvailabilityStatus(String availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
+    }
 }

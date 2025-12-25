@@ -10,32 +10,39 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VolunteerProfileServiceImpl implements VolunteerProfileService {
+public class VolunteerProfileServiceImpl
+        implements VolunteerProfileService {
 
     private final VolunteerProfileRepository repository;
 
-    public VolunteerProfileServiceImpl(VolunteerProfileRepository repository) {
+    public VolunteerProfileServiceImpl(
+            VolunteerProfileRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public VolunteerProfile createVolunteer(VolunteerProfile profile) {
-        if (repository.existsByVolunteerId(profile.getVolunteerId())) {
-            throw new BadRequestException("Volunteer ID already exists");
+    public VolunteerProfile createVolunteer(
+            VolunteerProfile volunteer) {
+
+        if (volunteer.getAvailabilityStatus() == null) {
+            volunteer.setAvailabilityStatus("AVAILABLE");
         }
-        if (repository.existsByEmail(profile.getEmail())) {
-            throw new BadRequestException("Email already exists");
-        }
-        if (repository.existsByPhone(profile.getPhone())) {
-            throw new BadRequestException("Phone already exists");
-        }
-        return repository.save(profile);
+        return repository.save(volunteer);
     }
 
     @Override
-    public VolunteerProfile getVolunteerById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Volunteer not found"));
+    public VolunteerProfile updateVolunteer(
+            Long id, VolunteerProfile updated) {
+
+        VolunteerProfile existing = repository.findById(id)
+                .orElseThrow(() ->
+                        new BadRequestException("Volunteer not found"));
+
+        existing.setVolunteerName(updated.getVolunteerName());
+        existing.setAvailabilityStatus(
+                updated.getAvailabilityStatus());
+
+        return repository.save(existing);
     }
 
     @Override
@@ -44,7 +51,13 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
-    public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
-        return repository.findByVolunteerId(volunteerId);
+    public List<VolunteerProfile> getAvailableVolunteers() {
+        return repository.findByAvailabilityStatus("AVAILABLE");
+    }
+
+    @Override
+    public Optional<VolunteerProfile> getByVolunteerCode(
+            String volunteerCode) {
+        return repository.findByVolunteerCode(volunteerCode);
     }
 }
