@@ -5,33 +5,35 @@ import com.example.demo.service.VolunteerProfileService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/volunteers")
 public class VolunteerProfileController {
 
-    private final VolunteerProfileService service;
+    private final VolunteerProfileService volunteerService;
 
-    // Constructor injection
-    public VolunteerProfileController(VolunteerProfileService service) {
-        this.service = service;
+    public VolunteerProfileController(VolunteerProfileService volunteerService) {
+        this.volunteerService = volunteerService;
     }
 
-    // Create volunteer
     @PostMapping
     public VolunteerProfile createVolunteer(@RequestBody VolunteerProfile profile) {
-        return service.save(profile);
+        return volunteerService.createVolunteer(profile);
     }
 
-    // Get all volunteers
+    @GetMapping("/{id}")
+    public VolunteerProfile getVolunteerById(@PathVariable Long id) {
+        return volunteerService.getVolunteerById(id);
+    }
+
     @GetMapping
     public List<VolunteerProfile> getAllVolunteers() {
-        return service.getAllVolunteers();
+        return volunteerService.getAllVolunteers();
     }
 
-    // Get volunteers by skill
-    @GetMapping("/skill/{skill}")
-    public List<VolunteerProfile> getVolunteersBySkill(@PathVariable String skill) {
-        return service.getVolunteersBySkill(skill);
+    @GetMapping("/lookup/{volunteerId}")
+    public Optional<VolunteerProfile> findByVolunteerId(@PathVariable String volunteerId) {
+        return volunteerService.findByVolunteerId(volunteerId);
     }
 }
