@@ -10,7 +10,7 @@ public class VolunteerProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String name;
     private String skill;
@@ -19,7 +19,7 @@ public class VolunteerProfile {
     public VolunteerProfile() {}
 
     // Getters and Setters
-    public Long getId() { return id; }
+    public String getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }
