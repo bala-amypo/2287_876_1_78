@@ -14,7 +14,11 @@ public class VolunteerProfile {
     private String password;
     private String role;
     private String availability;
+     private String skill;  // <-- Add this
 
+    // getters and setters
+    public String getSkill() { return skill; }
+    public void setSkill(String skill) { this.skill = skill; }
     // Getters and Setters
     public String getVolunteerId() {
         return volunteerId;
