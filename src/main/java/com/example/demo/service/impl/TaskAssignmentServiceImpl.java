@@ -4,7 +4,6 @@ import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.model.TaskRecord;
 import com.example.demo.model.VolunteerProfile;
-import com.example.demo.model.VolunteerSkillRecord;
 import com.example.demo.repository.TaskAssignmentRecordRepository;
 import com.example.demo.repository.TaskRecordRepository;
 import com.example.demo.repository.VolunteerProfileRepository;
@@ -12,6 +11,7 @@ import com.example.demo.repository.VolunteerSkillRecordRepository;
 import com.example.demo.service.TaskAssignmentService;
 import com.example.demo.util.SkillLevelUtil;
 import org.springframework.stereotype.Service;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -47,12 +47,13 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
             throw new BadRequestException("Task already has ACTIVE assignment");
         }
 
+        // AVAILABLE volunteers fetch pannitu
         List<VolunteerProfile> volunteers = volunteerRepository.findByAvailabilityStatus("AVAILABLE");
         if (volunteers.isEmpty()) {
             throw new BadRequestException("No AVAILABLE volunteers");
         }
 
-        // Find the best volunteer with required skill and level
+        // Best volunteer pick panna logic
         VolunteerProfile selectedVolunteer = volunteers.stream()
                 .filter(v -> skillRepository.findByVolunteerId(v.getId()).stream()
                         .anyMatch(skill -> skill.getSkillName().equals(task.getRequiredSkill())
