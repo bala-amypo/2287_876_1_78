@@ -1,45 +1,26 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.AssignmentEvaluationRecord;
-import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.repository.AssignmentEvaluationRecordRepository;
-import com.example.demo.repository.TaskAssignmentRecordRepository;
 import com.example.demo.service.AssignmentEvaluationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class AssignmentEvaluationServiceImpl
-        implements AssignmentEvaluationService {
+@Service
+public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationService {
 
-    private final AssignmentEvaluationRecordRepository evalRepo;
-    private final TaskAssignmentRecordRepository assignmentRepo;
+    @Autowired
+    private AssignmentEvaluationRecordRepository repository;
 
-    public AssignmentEvaluationServiceImpl(
-            AssignmentEvaluationRecordRepository evalRepo,
-            TaskAssignmentRecordRepository assignmentRepo) {
-        this.evalRepo = evalRepo;
-        this.assignmentRepo = assignmentRepo;
+    @Override
+    public AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord evaluation) {
+        return repository.save(evaluation);
     }
 
     @Override
-    public AssignmentEvaluationRecord evaluateAssignment(
-            AssignmentEvaluationRecord evaluation) {
-
-        TaskAssignmentRecord assignment =
-                assignmentRepo.findById(evaluation.getAssignmentId())
-                        .orElseThrow(() ->
-                                new BadRequestException("Assignment not found"));
-
-        if (!"COMPLETED".equals(assignment.getStatus()))
-            throw new BadRequestException("Assignment not completed");
-
-        return evalRepo.save(evaluation);
-    }
-
-    @Override
-    public List<AssignmentEvaluationRecord>
-    getEvaluationsByAssignment(Long assignmentId) {
-        return evalRepo.findByAssignmentId(assignmentId);
+    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(Long assignmentId) {
+        return repository.findByAssignmentId(assignmentId);
     }
 }
