@@ -19,8 +19,13 @@ public class VolunteerSkillRecord {
 
     private LocalDateTime updatedAt;
 
-    public VolunteerSkillRecord() {
-    }
+    private boolean certified;
+
+
+public void setCertified(boolean certified) {
+    this.certified = certified;
+}
+
 
     public Long getId() {
         return id;
