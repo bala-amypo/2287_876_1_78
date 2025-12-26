@@ -6,6 +6,7 @@ import com.example.demo.service.VolunteerProfileService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VolunteerProfileServiceImpl implements VolunteerProfileService {
@@ -43,12 +44,7 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
-    public VolunteerProfile getByVolunteerCode(String volunteerId) {
-        return repository.findByVolunteerId(volunteerId).orElse(null);
-    }
-
-    @Override
-    public VolunteerProfile findByVolunteerId(String volunteerId) {
-        return repository.findByVolunteerId(volunteerId).orElse(null);
+    public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
+        return repository.findByVolunteerId(volunteerId);
     }
 }
