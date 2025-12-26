@@ -1,22 +1,20 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.AuthRequest;
-import com.example.demo.model.AuthResponse;
-import com.example.demo.service.AuthService;
+import com.example.demo.service.JwtService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthService service;
+    private final JwtService jwtService;
 
-    public AuthController(AuthService service) {
-        this.service = service;
+    public AuthController(JwtService jwtService) {
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/token")
-    public AuthResponse generateToken(@RequestBody AuthRequest request) {
-        return service.generateToken(request);
+    public String generateToken(@RequestParam String username) {
+        return jwtService.generateToken(username);
     }
 }
