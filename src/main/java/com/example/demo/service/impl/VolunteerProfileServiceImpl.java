@@ -45,8 +45,9 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
         return repository.findAll();
     }
 
-    @Override
-    public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
-        return repository.findByVolunteerId(volunteerId);
-    }
+   @Override
+    public Optional<VolunteerProfile> getByVolunteerCode(String volunteerCode) {
+    return repository.findByVolunteerId(volunteerCode);
+}
+
 }
