@@ -8,11 +8,20 @@ public class VolunteerProfile {
 
     @Id
     private Long id;
+    private String email;
 
     private String volunteerCode;
     private String fullName;
     private String phone;
     private String availabilityStatus;
+    public String getEmail() {
+    return email;
+}
+
+public void setEmail(String email) {
+    this.email = email;
+}
+
 
     public VolunteerProfile() {
     }
