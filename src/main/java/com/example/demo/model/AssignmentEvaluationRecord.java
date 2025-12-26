@@ -15,6 +15,10 @@ public class AssignmentEvaluationRecord {
     // getters and setters
     public Long getAssignmentId() { return assignmentId; }
     public void setAssignmentId(Long assignmentId) { this.assignmentId = assignmentId; }
+    @PrePersist
+public void prePersist() {
+    evaluatedAt = java.time.LocalDateTime.now();
+}
 
     // other getters and setters
 }

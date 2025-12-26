@@ -17,6 +17,13 @@ public class TaskAssignmentRecord {
     public void defaultStatus() {
         if (status == null) status = "ACTIVE";
     }
+    @PrePersist
+public void prePersist() {
+    if (status == null) {
+        status = "ACTIVE";
+    }
+}
+
 
     public Long getId() { return id; }
     public void setId(Long id) {

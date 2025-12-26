@@ -20,6 +20,12 @@ public class TaskRecord {
     public void defaultStatus() {
         if (status == null) status = "OPEN";
     }
+    @PrePersist
+public void prePersist() {
+    if (status == null) {
+        status = "OPEN";
+    }
+}
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
