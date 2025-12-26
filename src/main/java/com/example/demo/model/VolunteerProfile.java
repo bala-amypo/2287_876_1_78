@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class VolunteerProfile {
@@ -10,32 +11,32 @@ public class VolunteerProfile {
     private Long id;
 
     @Column(unique = true)
-    private String volunteerId;
+    private String volunteerCode;
 
     private String fullName;
     private String email;
     private String phone;
-    private String availabilityStatus;
 
-    // ===== getters & setters =====
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getVolunteerCode() {
+        return volunteerCode;
     }
 
-    public String getVolunteerId() {
-        return volunteerId;
+    public void setVolunteerCode(String volunteerCode) {
+        this.volunteerCode = volunteerCode;
     }
 
-    public void setVolunteerId(String volunteerId) {
-        this.volunteerId = volunteerId;
-    }
-
-    public String getFullName() {   // ✅ IMPORTANT
+    public String getFullName() {
         return fullName;
     }
 
@@ -57,13 +58,5 @@ public class VolunteerProfile {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAvailabilityStatus() {
-        return availabilityStatus;
-    }
-
-    public void setAvailabilityStatus(String availabilityStatus) {
-        this.availabilityStatus = availabilityStatus;
     }
 }
