@@ -5,6 +5,8 @@ import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.TaskAssignmentService;
 import com.example.demo.util.SkillLevelUtil;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 @Service
