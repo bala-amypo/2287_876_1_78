@@ -8,9 +8,11 @@ public class VolunteerProfile {
 
     @Id
     private Long id;
-    private String name;
-    private String email;
-    private String skill;
+
+    private String volunteerCode;
+    private String fullName;
+    private String phone;
+    private String availabilityStatus;
 
     public VolunteerProfile() {
     }
@@ -23,27 +25,35 @@ public class VolunteerProfile {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getVolunteerCode() {
+        return volunteerCode;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setVolunteerCode(String volunteerCode) {
+        this.volunteerCode = volunteerCode;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getSkill() {
-        return skill;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setSkill(String skill) {
-        this.skill = skill;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAvailabilityStatus() {
+        return availabilityStatus;
+    }
+
+    public void setAvailabilityStatus(String availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
     }
 }
