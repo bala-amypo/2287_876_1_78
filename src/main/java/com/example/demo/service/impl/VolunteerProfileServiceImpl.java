@@ -33,7 +33,7 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
-    public VolunteerProfile getVolunteerById(Long id) {
-        return volunteerProfileRepository.findById(id).orElse(null);
+    public VolunteerProfile findByVolunteerId(String volunteerId) {
+        return volunteerProfileRepository.findByVolunteerId(volunteerId);
     }
 }

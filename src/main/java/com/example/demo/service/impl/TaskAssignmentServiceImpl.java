@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.TaskAssignment;
+import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.repository.TaskAssignmentRepository;
 import com.example.demo.service.TaskAssignmentService;
 import org.springframework.stereotype.Service;
@@ -19,12 +19,12 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
 
     @Override
     @Transactional
-    public TaskAssignment assignTask(TaskAssignment assignment) {
+    public TaskAssignmentRecord assignTask(TaskAssignmentRecord assignment) {
         return taskAssignmentRepository.save(assignment);
     }
 
     @Override
-    public List<TaskAssignment> getAllAssignments() {
+    public List<TaskAssignmentRecord> getAllAssignments() {
         return taskAssignmentRepository.findAll();
     }
 }

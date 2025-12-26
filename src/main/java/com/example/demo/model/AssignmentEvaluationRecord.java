@@ -1,21 +1,20 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.Instant;
 
 @Entity
 public class AssignmentEvaluationRecord {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Instant evaluatedAt;
-
-    @PrePersist
-    public void setTimestamp() {
-        this.evaluatedAt = Instant.now();
-    }
+    private Long assignmentId; // <- make sure this exists
+    private Long volunteerId;
+    private int score;
 
     // getters and setters
+    public Long getAssignmentId() { return assignmentId; }
+    public void setAssignmentId(Long assignmentId) { this.assignmentId = assignmentId; }
+
+    // other getters and setters
 }
