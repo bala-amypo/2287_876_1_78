@@ -15,7 +15,6 @@ public interface VolunteerProfileService {
 
     Optional<VolunteerProfile> getByVolunteerCode(String volunteerCode);
 
-    // 🔥 ADD THESE (Controller expects)
     VolunteerProfile updateVolunteer(Long id, VolunteerProfile profile);
 
     List<VolunteerProfile> getAvailableVolunteers();

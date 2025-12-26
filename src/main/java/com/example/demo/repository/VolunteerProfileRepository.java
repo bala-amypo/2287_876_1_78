@@ -8,16 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VolunteerProfileRepository
-        extends JpaRepository<VolunteerProfile, Long> {
+public interface VolunteerProfileRepository extends JpaRepository<VolunteerProfile, Long> {
 
-    boolean existsByVolunteerId(String volunteerId);
-
-    boolean existsByEmail(String email);
-
-    boolean existsByPhone(String phone);
-
-    Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
+    Optional<VolunteerProfile> findByVolunteerCode(String volunteerCode);
 
     List<VolunteerProfile> findByAvailabilityStatus(String availabilityStatus);
 }
