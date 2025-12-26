@@ -7,7 +7,7 @@ import com.example.demo.service.TaskAssignmentService;
 import com.example.demo.util.SkillLevelUtil;
 
 import java.util.List;
-
+@Service
 public class TaskAssignmentServiceImpl implements TaskAssignmentService {
 
     private final TaskAssignmentRecordRepository ar;
