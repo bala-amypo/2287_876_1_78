@@ -9,21 +9,40 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 
 @Component
 public class JwtTokenProvider {
 
-    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private final long EXPIRATION_TIME = 86400000; // 1 day
+    private String secretKey;
+    private long validityInMs;
+    private Key key;
+
+    // REQUIRED by Spring
+    public JwtTokenProvider() {
+        this.secretKey = "default-secret-key-default-secret-key";
+        this.validityInMs = 3600000;
+        this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
+    }
+
+    // REQUIRED by TEST CASE
+    public JwtTokenProvider(String secretKey, long validityInMs) {
+        this.secretKey = secretKey;
+        this.validityInMs = validityInMs;
+        this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
+    }
 
     public String generateToken(Authentication authentication, Long userId, String role) {
+        Date now = new Date();
+        Date expiry = new Date(now.getTime() + validityInMs);
+
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim("userId", userId)
                 .claim("role", role)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(key)
+                .setIssuedAt(now)
+                .setExpiration(expiry)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -37,12 +56,15 @@ public class JwtTokenProvider {
     }
 
     public String getUsernameFromToken(String token) {
-        Claims claims = Jwts.parserBuilder()
+        return getAllClaims(token).getSubject();
+    }
+
+    // REQUIRED by TEST CASE
+    public Claims getAllClaims(String token) {
+        return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-
-        return claims.getSubject(); // ✅ FIX
     }
 }

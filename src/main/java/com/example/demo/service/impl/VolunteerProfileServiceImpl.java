@@ -17,9 +17,24 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
+    public VolunteerProfile createVolunteer(VolunteerProfile profile) {
+        return repository.save(profile);
+    }
+
+    @Override
     public VolunteerProfile updateVolunteer(Long id, VolunteerProfile profile) {
         profile.setId(id);
         return repository.save(profile);
+    }
+
+    @Override
+    public VolunteerProfile getVolunteerById(long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<VolunteerProfile> getAllVolunteers() {
+        return repository.findAll();
     }
 
     @Override
@@ -28,7 +43,12 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
-    public VolunteerProfile getByVolunteerCode(String volunteerCode) {
-        return repository.findByVolunteerCode(volunteerCode);
+    public VolunteerProfile getByVolunteerCode(String volunteerId) {
+        return repository.findByVolunteerId(volunteerId).orElse(null);
+    }
+
+    @Override
+    public VolunteerProfile findByVolunteerId(String volunteerId) {
+        return repository.findByVolunteerId(volunteerId).orElse(null);
     }
 }
