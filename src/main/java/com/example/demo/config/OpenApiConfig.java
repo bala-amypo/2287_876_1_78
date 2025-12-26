@@ -15,6 +15,6 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .servers(List.of(
                         new Server().url("https://9176.32procr.amypo.ai/")
-                ));
+                ));//csrf =  cross sight request forgery
     }
 }
