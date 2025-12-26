@@ -32,4 +32,9 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
     public List<TaskAssignmentRecord> getAssignmentsByVolunteer(Long volunteerId) {
         return taskAssignmentRepository.findByVolunteerId(volunteerId);
     }
+    @Override
+public List<TaskAssignmentRecord> getAssignmentsByTask(Long taskId) {
+    return taskAssignmentRepository.findByTaskId(taskId);
+}
+
 }

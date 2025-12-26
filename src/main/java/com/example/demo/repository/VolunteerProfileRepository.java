@@ -8,15 +8,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VolunteerProfileRepository
-        extends JpaRepository<VolunteerProfile, Long> {
+public interface VolunteerProfileRepository extends JpaRepository<VolunteerProfile, Long> {
 
     boolean existsByVolunteerId(String volunteerId);
 
     boolean existsByPhone(String phone);
 
+    boolean existsByEmail(String email);
 
     List<VolunteerProfile> findByAvailabilityStatus(String status);
-     Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
-    boolean existsByEmail(String email);
+
+    // For service method getByVolunteerCode or findByVolunteerId
+    Optional<VolunteerProfile> findByVolunteerCode(String code);
+
+    // Optional: keep this if your service uses findByVolunteerId
+    Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
 }

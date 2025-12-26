@@ -38,5 +38,9 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
 public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
     return volunteerProfileRepository.findByVolunteerId(volunteerId);
 }
+@Override
+public Optional<VolunteerProfile> getByVolunteerCode(String code) {
+    return volunteerProfileRepository.findByVolunteerCode(code);
+}
 
 }
