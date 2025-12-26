@@ -14,14 +14,7 @@ public class VolunteerProfile {
     private String email;
     private String phone;
     private String availabilityStatus;
-    private String volunteerCode;
-
-public String getVolunteerCode() {
-    return volunteerCode;
-}
-
-public void setVolunteerCode(String volunteerCode) {
-    this.volunteerCode = volunteerCode;
+   
 }
 
     public VolunteerProfile() {}
