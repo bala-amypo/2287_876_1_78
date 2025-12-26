@@ -1,26 +1,18 @@
 package com.example.demo.servlet;
 
-import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 
-@Component
+@WebServlet("/hello")
 public class HelloServlet extends HttpServlet {
 
- @Override
-public void doGet(HttpServletRequest request,
-                  HttpServletResponse response) throws IOException {
-    response.getWriter().write("Hello");
-}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException {
 
-
-        PrintWriter out = response.getWriter();
-        out.print("Hello Servlet");
-        out.flush();
+        resp.getWriter().write("Hello World");
     }
 }
