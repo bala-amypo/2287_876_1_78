@@ -5,7 +5,6 @@ import com.example.demo.service.VolunteerProfileService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/volunteers")
@@ -13,27 +12,15 @@ public class VolunteerProfileController {
 
     private final VolunteerProfileService service;
 
-    public VolunteerProfileController(
-            VolunteerProfileService service) {
+    public VolunteerProfileController(VolunteerProfileService service) {
         this.service = service;
-    }
-
-    @PostMapping
-    public VolunteerProfile createVolunteer(
-            @RequestBody VolunteerProfile volunteer) {
-        return service.createVolunteer(volunteer);
     }
 
     @PutMapping("/{id}")
     public VolunteerProfile updateVolunteer(
             @PathVariable Long id,
-            @RequestBody VolunteerProfile volunteer) {
-        return service.updateVolunteer(id, volunteer);
-    }
-
-    @GetMapping
-    public List<VolunteerProfile> getAllVolunteers() {
-        return service.getAllVolunteers();
+            @RequestBody VolunteerProfile profile) {
+        return service.updateVolunteer(id, profile);
     }
 
     @GetMapping("/available")
@@ -42,7 +29,7 @@ public class VolunteerProfileController {
     }
 
     @GetMapping("/code/{volunteerCode}")
-    public Optional<VolunteerProfile> getByCode(
+    public VolunteerProfile getByVolunteerCode(
             @PathVariable String volunteerCode) {
         return service.getByVolunteerCode(volunteerCode);
     }
