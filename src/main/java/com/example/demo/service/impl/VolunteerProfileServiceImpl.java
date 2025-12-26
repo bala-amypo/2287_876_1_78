@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class VolunteerProfileServiceImpl implements VolunteerProfileService {
 
@@ -34,13 +33,19 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
         return volunteerProfileRepository.findAll();
     }
 
-   @Override
-public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
-    return volunteerProfileRepository.findByVolunteerId(volunteerId);
-}
-@Override
-public Optional<VolunteerProfile> getByVolunteerCode(String code) {
-    return volunteerProfileRepository.findByVolunteerCode(code);
-}
+    @Override
+    public VolunteerProfile getVolunteerById(Long id) {
+        return volunteerProfileRepository.findById(id).orElse(null);
+    }
 
+    @Override
+    public VolunteerProfile getByVolunteerCode(String volunteerCode) {
+        return volunteerProfileRepository.findByVolunteerId(volunteerCode).orElse(null);
+    }
+
+    @Override
+    public List<VolunteerProfile> findByVolunteerId(String volunteerId) {
+        Optional<VolunteerProfile> volunteer = volunteerProfileRepository.findByVolunteerId(volunteerId);
+        return volunteer.map(List::of).orElse(List.of());
+    }
 }

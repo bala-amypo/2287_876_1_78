@@ -8,10 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TaskAssignmentRepository extends JpaRepository<TaskAssignmentRecord, Long> {
-
-    // Get all task assignments for a specific volunteer
     List<TaskAssignmentRecord> findByVolunteerId(Long volunteerId);
-
-    // Get all task assignments for a specific task
-    List<TaskAssignmentRecord> findByTaskId(Long taskId);
+    // Optional: List<TaskAssignmentRecord> findByTaskId(Long taskId);
 }
