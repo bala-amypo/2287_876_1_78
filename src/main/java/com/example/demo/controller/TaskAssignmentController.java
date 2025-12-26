@@ -16,18 +16,13 @@ public class TaskAssignmentController {
         this.service = service;
     }
 
-    @PostMapping
-    public TaskAssignmentRecord assignTask(@RequestBody TaskAssignmentRecord record) {
-        return service.assignTask(record);
-    }
-
     @GetMapping
-    public List<TaskAssignmentRecord> getAllAssignments() {
-        return service.getAllAssignments();
+    public List<TaskAssignmentRecord> getAll() {
+        return service.getAll();
     }
 
-    @GetMapping("/task/{taskId}")
-    public List<TaskAssignmentRecord> getAssignmentsByTask(@PathVariable Long taskId) {
-        return service.getAssignmentsByTask(taskId);
+    @PostMapping
+    public TaskAssignmentRecord create(@RequestBody TaskAssignmentRecord record) {
+        return service.assignTask(record);
     }
 }

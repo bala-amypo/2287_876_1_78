@@ -15,7 +15,7 @@ public class VolunteerSkillController {
     }
 
     @PostMapping
-    public VolunteerSkillRecord addSkill(@RequestBody VolunteerSkillRecord record) {
+    public VolunteerSkillRecord add(@RequestBody VolunteerSkillRecord record) {
         return service.addSkill(record);
     }
 }
