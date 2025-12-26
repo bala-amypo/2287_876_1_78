@@ -10,11 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TaskRecordServiceImpl implements TaskRecordService {
+public class TaskRecordServiceImpl
+        implements TaskRecordService {
 
     private final TaskRecordRepository repository;
 
-    public TaskRecordServiceImpl(TaskRecordRepository repository) {
+    public TaskRecordServiceImpl(
+            TaskRecordRepository repository) {
         this.repository = repository;
     }
 
@@ -28,9 +30,9 @@ public class TaskRecordServiceImpl implements TaskRecordService {
 
     @Override
     public TaskRecord updateTask(Long id, TaskRecord updated) {
-
         TaskRecord existing = repository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Task not found"));
+                .orElseThrow(() ->
+                        new BadRequestException("Task not found"));
 
         existing.setTaskName(updated.getTaskName());
         existing.setRequiredSkill(updated.getRequiredSkill());
@@ -52,7 +54,8 @@ public class TaskRecordServiceImpl implements TaskRecordService {
     }
 
     @Override
-    public Optional<TaskRecord> getTaskByCode(String taskCode) {
+    public Optional<TaskRecord> getTaskByCode(
+            String taskCode) {
         return repository.findByTaskCode(taskCode);
     }
 }

@@ -2,14 +2,16 @@ package com.example.demo.service.impl;
 
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.AssignmentEvaluationRecord;
+import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.repository.AssignmentEvaluationRecordRepository;
 import com.example.demo.repository.TaskAssignmentRecordRepository;
 import com.example.demo.service.AssignmentEvaluationService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Service   // ✅ MUST
+@Service
 public class AssignmentEvaluationServiceImpl
         implements AssignmentEvaluationService {
 
@@ -19,6 +21,7 @@ public class AssignmentEvaluationServiceImpl
     public AssignmentEvaluationServiceImpl(
             AssignmentEvaluationRecordRepository evalRepo,
             TaskAssignmentRecordRepository assignmentRepo) {
+
         this.evalRepo = evalRepo;
         this.assignmentRepo = assignmentRepo;
     }
@@ -27,10 +30,20 @@ public class AssignmentEvaluationServiceImpl
     public AssignmentEvaluationRecord evaluateAssignment(
             AssignmentEvaluationRecord evaluation) {
 
-        assignmentRepo.findById(evaluation.getAssignmentId())
-                .orElseThrow(() ->
-                        new BadRequestException("Assignment not found"));
+        TaskAssignmentRecord assignment =
+                assignmentRepo.findById(
+                        evaluation.getAssignmentId())
+                        .orElseThrow(() ->
+                                new BadRequestException(
+                                        "Assignment not found"));
 
+        if (!"COMPLETED".equals(
+                assignment.getStatus())) {
+            throw new BadRequestException(
+                    "Assignment not completed");
+        }
+
+        evaluation.setEvaluatedAt(LocalDateTime.now());
         return evalRepo.save(evaluation);
     }
 

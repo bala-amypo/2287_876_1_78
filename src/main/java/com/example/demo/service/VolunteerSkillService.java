@@ -1,15 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.model.VolunteerSkillRecord;
+
 import java.util.List;
 
 public interface VolunteerSkillService {
 
-    VolunteerSkillRecord addSkill(VolunteerSkillRecord skill);
+    VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord record);
 
     List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId);
-
-    List<VolunteerSkillRecord> getSkillsBySkill(String skillName);
-    VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill);
-
 }

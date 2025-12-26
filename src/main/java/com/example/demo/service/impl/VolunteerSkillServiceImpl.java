@@ -9,31 +9,27 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class VolunteerSkillServiceImpl implements VolunteerSkillService {
+public class VolunteerSkillServiceImpl
+        implements VolunteerSkillService {
 
     private final VolunteerSkillRecordRepository repository;
 
-    public VolunteerSkillServiceImpl(VolunteerSkillRecordRepository repository) {
+    public VolunteerSkillServiceImpl(
+            VolunteerSkillRecordRepository repository) {
         this.repository = repository;
     }
+
     @Override
-public VolunteerSkillRecord addSkill(VolunteerSkillRecord skill) {
-    return repository.save(skill);
-}
+    public VolunteerSkillRecord addOrUpdateSkill(
+            VolunteerSkillRecord record) {
 
-@Override
-public List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId) {
-    return repository.findByVolunteerId(volunteerId);
-}
+        record.setUpdatedAt(LocalDateTime.now());
+        return repository.save(record);
+    }
 
-@Override
-public List<VolunteerSkillRecord> getSkillsBySkill(String skillName) {
-    return repository.findBySkillName(skillName);
-}
- @Override
-public VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill) {
-    return skill;
-}
-
-
+    @Override
+    public List<VolunteerSkillRecord> getSkillsByVolunteer(
+            Long volunteerId) {
+        return repository.findByVolunteerId(volunteerId);
+    }
 }
