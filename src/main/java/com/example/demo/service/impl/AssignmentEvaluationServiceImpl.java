@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.AssignmentEvaluationRecord;
 import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.repository.AssignmentEvaluationRecordRepository;
@@ -15,14 +14,13 @@ import java.util.List;
 public class AssignmentEvaluationServiceImpl
         implements AssignmentEvaluationService {
 
-    private final AssignmentEvaluationRecordRepository evalRepo;
+    private final AssignmentEvaluationRecordRepository repo;
     private final TaskAssignmentRecordRepository assignmentRepo;
 
     public AssignmentEvaluationServiceImpl(
-            AssignmentEvaluationRecordRepository evalRepo,
+            AssignmentEvaluationRecordRepository repo,
             TaskAssignmentRecordRepository assignmentRepo) {
-
-        this.evalRepo = evalRepo;
+        this.repo = repo;
         this.assignmentRepo = assignmentRepo;
     }
 
@@ -32,24 +30,20 @@ public class AssignmentEvaluationServiceImpl
 
         TaskAssignmentRecord assignment =
                 assignmentRepo.findById(
-                        evaluation.getAssignmentId())
-                        .orElseThrow(() ->
-                                new BadRequestException(
-                                        "Assignment not found"));
+                        evaluation.getAssignmentId()).orElse(null);
 
-        if (!"COMPLETED".equals(
-                assignment.getStatus())) {
-            throw new BadRequestException(
-                    "Assignment not completed");
+        if (assignment != null) {
+            assignment.setStatus("EVALUATED");
+            assignmentRepo.save(assignment);
         }
 
         evaluation.setEvaluatedAt(LocalDateTime.now());
-        return evalRepo.save(evaluation);
+        return repo.save(evaluation);
     }
 
     @Override
-    public List<AssignmentEvaluationRecord>
-    getEvaluationsByAssignment(Long assignmentId) {
-        return evalRepo.findByAssignmentId(assignmentId);
+    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(
+            Long assignmentId) {
+        return repo.findByAssignmentId(assignmentId);
     }
 }

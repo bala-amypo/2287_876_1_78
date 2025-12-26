@@ -57,6 +57,10 @@ public class AssignmentEvaluationRecord {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+    public void setEvaluatedAt(LocalDateTime evaluatedAt) {
+    this.evaluatedAt = evaluatedAt;
+}
+
 
     public LocalDateTime getEvaluatedAt() {
         return evaluatedAt;

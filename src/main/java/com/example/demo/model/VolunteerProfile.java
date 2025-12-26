@@ -55,6 +55,9 @@ public class VolunteerProfile {
     public String getPhone() {
         return phone;
     }
+     public Long getVolunteerId() {
+    return volunteerId;
+}
 
     public void setPhone(String phone) {
         this.phone = phone;

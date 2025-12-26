@@ -28,6 +28,14 @@ public class TaskAssignmentRecord {
     public Long getVolunteerId() {
         return volunteerId;
     }
+    public String getStatus() {
+    return status;
+}
+
+public void setStatus(String status) {
+    this.status = status;
+}
+
 
     public void setVolunteerId(Long volunteerId) {
         this.volunteerId = volunteerId;

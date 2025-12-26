@@ -36,6 +36,14 @@ public class VolunteerSkillRecord {
     public void setVolunteerId(Long volunteerId) {
         this.volunteerId = volunteerId;
     }
+    public int getSkillLevel() {
+    return skillLevel;
+}
+
+public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+}
+
 
     public String getSkillName() {
         return skillName;
