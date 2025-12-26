@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface AssignmentEvaluationRecordRepository extends JpaRepository<AssignmentEvaluationRecord, Long> {
+public interface AssignmentEvaluationRecordRepository
+        extends JpaRepository<AssignmentEvaluationRecord, Long> {
     List<AssignmentEvaluationRecord> findByAssignmentId(Long assignmentId);
 }
+
