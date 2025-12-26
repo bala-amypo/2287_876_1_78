@@ -44,6 +44,11 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
+    public VolunteerProfile getByVolunteerCode(String volunteerId) {
+        return repository.findByVolunteerId(volunteerId).orElse(null);
+    }
+
+    @Override
     public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
         return repository.findByVolunteerId(volunteerId);
     }
