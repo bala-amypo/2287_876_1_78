@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "volunteer_skill_records")
+@Table(name = "volunteer_skill_record")
 public class VolunteerSkillRecord {
 
     @Id
@@ -15,24 +15,18 @@ public class VolunteerSkillRecord {
 
     private String skillName;
 
-    private String skillLevel;
+    private int level;
 
     private LocalDateTime updatedAt;
 
-    private boolean certified;
-
-
-public void setCertified(boolean certified) {
-    this.certified = certified;
-}
-
+    @PrePersist
+    @PreUpdate
+    public void updateTime() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getVolunteerId() {
@@ -51,19 +45,15 @@ public void setCertified(boolean certified) {
         this.skillName = skillName;
     }
 
-    public String getSkillLevel() {
-        return skillLevel;
+    public int getLevel() {
+        return level;
     }
 
-    public void setSkillLevel(String skillLevel) {
-        this.skillLevel = skillLevel;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
