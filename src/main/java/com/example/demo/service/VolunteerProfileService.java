@@ -7,17 +7,11 @@ import java.util.Optional;
 
 public interface VolunteerProfileService {
 
-    VolunteerProfile createVolunteer(VolunteerProfile profile);
-
-    VolunteerProfile updateVolunteer(Long id, VolunteerProfile profile);
-
-    VolunteerProfile getVolunteerById(long id);
+    VolunteerProfile createVolunteerProfile(VolunteerProfile volunteer);
 
     List<VolunteerProfile> getAllVolunteers();
 
-    List<VolunteerProfile> getAvailableVolunteers();
-
-    VolunteerProfile getByVolunteerCode(String volunteerId);
-
     Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
+
+    List<VolunteerProfile> getAvailableVolunteers();
 }

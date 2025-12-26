@@ -34,17 +34,12 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
-    public VolunteerProfile getVolunteerById(Long id) {
-        return volunteerProfileRepository.findById(id).orElse(null);
-    }
-
-    @Override
     public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
         return volunteerProfileRepository.findByVolunteerId(volunteerId);
     }
 
     @Override
-    public VolunteerProfile getByVolunteerCode(String volunteerCode) {
-        return volunteerProfileRepository.findByVolunteerId(volunteerCode).orElse(null);
+    public List<VolunteerProfile> getAvailableVolunteers() {
+        return volunteerProfileRepository.findByAvailabilityStatus("available");
     }
 }
