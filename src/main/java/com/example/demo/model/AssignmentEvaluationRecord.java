@@ -11,16 +11,10 @@ public class AssignmentEvaluationRecord {
     private Long id;
 
     private Long assignmentId;
-    private Long volunteerId;
     private int score;
     private String remarks;
 
     private LocalDateTime evaluatedAt;
-
-    @PrePersist
-    public void onEvaluate() {
-        this.evaluatedAt = LocalDateTime.now();
-    }
 
     public Long getId() {
         return id;
@@ -32,14 +26,6 @@ public class AssignmentEvaluationRecord {
 
     public void setAssignmentId(Long assignmentId) {
         this.assignmentId = assignmentId;
-    }
-
-    public Long getVolunteerId() {
-        return volunteerId;
-    }
-
-    public void setVolunteerId(Long volunteerId) {
-        this.volunteerId = volunteerId;
     }
 
     public int getScore() {
@@ -57,12 +43,12 @@ public class AssignmentEvaluationRecord {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
-    public void setEvaluatedAt(LocalDateTime evaluatedAt) {
-    this.evaluatedAt = evaluatedAt;
-}
-
 
     public LocalDateTime getEvaluatedAt() {
         return evaluatedAt;
+    }
+
+    public void setEvaluatedAt(LocalDateTime evaluatedAt) {
+        this.evaluatedAt = evaluatedAt;
     }
 }

@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.model.AssignmentEvaluationRecord;
 import com.example.demo.model.TaskAssignmentRecord;
+import com.example.demo.model.TaskAssignmentRecord.AssignmentStatus;
 import com.example.demo.repository.AssignmentEvaluationRecordRepository;
 import com.example.demo.repository.TaskAssignmentRecordRepository;
 import com.example.demo.service.AssignmentEvaluationService;
@@ -33,7 +34,7 @@ public class AssignmentEvaluationServiceImpl
                         evaluation.getAssignmentId()).orElse(null);
 
         if (assignment != null) {
-            assignment.setStatus("EVALUATED");
+            assignment.setStatus(AssignmentStatus.EVALUATED);
             assignmentRepo.save(assignment);
         }
 
@@ -42,8 +43,8 @@ public class AssignmentEvaluationServiceImpl
     }
 
     @Override
-    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(
-            Long assignmentId) {
+    public List<AssignmentEvaluationRecord>
+    getEvaluationsByAssignment(Long assignmentId) {
         return repo.findByAssignmentId(assignmentId);
     }
 }
