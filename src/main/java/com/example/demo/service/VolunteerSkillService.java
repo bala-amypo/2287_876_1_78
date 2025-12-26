@@ -5,7 +5,8 @@ import java.util.List;
 
 public interface VolunteerSkillService {
 
-    VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill);
+    // 🔥 Controller expects this
+    VolunteerSkillRecord addSkill(VolunteerSkillRecord skill);
 
     List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId);
 

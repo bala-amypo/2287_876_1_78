@@ -17,37 +17,24 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     public VolunteerProfileServiceImpl(VolunteerProfileRepository repository) {
         this.repository = repository;
     }
-
     @Override
-    public VolunteerProfile createVolunteer(VolunteerProfile profile) {
+public VolunteerProfile updateVolunteer(Long id, VolunteerProfile profile) {
 
-        if (repository.existsByVolunteerId(profile.getVolunteerId())) {
-            throw new BadRequestException("Volunteer ID already exists");
-        }
-        if (repository.existsByEmail(profile.getEmail())) {
-            throw new BadRequestException("Email already exists");
-        }
-        if (repository.existsByPhone(profile.getPhone())) {
-            throw new BadRequestException("Phone already exists");
-        }
+    VolunteerProfile existing = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Volunteer not found"));
 
-        return repository.save(profile);
-    }
+    existing.setFullName(profile.getFullName());
+    existing.setEmail(profile.getEmail());
+    existing.setPhone(profile.getPhone());
+    existing.setAvailabilityStatus(profile.getAvailabilityStatus());
 
-    @Override
-    public VolunteerProfile getVolunteerById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Volunteer not found"));
-    }
-
-    @Override
-    public List<VolunteerProfile> getAllVolunteers() {
-        return repository.findAll();
-    }
-
-   @Override
-    public Optional<VolunteerProfile> getByVolunteerCode(String volunteerCode) {
-    return repository.findByVolunteerId(volunteerCode);
+    return repository.save(existing);
 }
 
+@Override
+public List<VolunteerProfile> getAvailableVolunteers() {
+    return repository.findByAvailabilityStatus("AVAILABLE");
 }
+
+
+   }

@@ -32,4 +32,10 @@ public class VolunteerSkillServiceImpl implements VolunteerSkillService {
     public List<VolunteerSkillRecord> getSkillsBySkill(String skillName) {
         return repository.findBySkillName(skillName);
     }
+    @Override
+public VolunteerSkillRecord addSkill(VolunteerSkillRecord skill) {
+    skill.setUpdatedAt(java.time.LocalDateTime.now());
+    return repository.save(skill);
+}
+
 }
