@@ -16,26 +16,20 @@ public class VolunteerSkillServiceImpl implements VolunteerSkillService {
     public VolunteerSkillServiceImpl(VolunteerSkillRecordRepository repository) {
         this.repository = repository;
     }
-
-    @Override
-    public VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill) {
-        skill.setUpdatedAt(LocalDateTime.now());
-        return repository.save(skill);
-    }
-
-    @Override
-    public List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId) {
-        return repository.findByVolunteerId(volunteerId);
-    }
-
-    @Override
-    public List<VolunteerSkillRecord> getSkillsBySkill(String skillName) {
-        return repository.findBySkillName(skillName);
-    }
     @Override
 public VolunteerSkillRecord addSkill(VolunteerSkillRecord skill) {
-    skill.setUpdatedAt(java.time.LocalDateTime.now());
     return repository.save(skill);
 }
+
+@Override
+public List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId) {
+    return repository.findByVolunteerId(volunteerId);
+}
+
+@Override
+public List<VolunteerSkillRecord> getSkillsBySkill(String skillName) {
+    return repository.findBySkillName(skillName);
+}
+
 
 }

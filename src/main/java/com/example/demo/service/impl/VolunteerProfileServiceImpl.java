@@ -35,6 +35,10 @@ public VolunteerProfile updateVolunteer(Long id, VolunteerProfile profile) {
 public List<VolunteerProfile> getAvailableVolunteers() {
     return repository.findByAvailabilityStatus("AVAILABLE");
 }
+@Override
+public Optional<VolunteerProfile> getByVolunteerCode(String volunteerCode) {
+    return repository.findByVolunteerCode(volunteerCode);
+}
 
 
    }
