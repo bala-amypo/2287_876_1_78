@@ -3,18 +3,14 @@ package com.example.demo.servlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.ServletException;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component   // ⭐ IMPORTANT – idhu dhaan bean create pannum
 public class HelloServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
-        resp.getWriter().write("Hello Servlet Working");
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/plain");
+        resp.getWriter().write("Hello from HelloServlet");
     }
 }

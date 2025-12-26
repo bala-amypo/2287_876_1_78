@@ -1,57 +1,49 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.VolunteerProfile;
 import com.example.demo.repository.VolunteerProfileRepository;
 import com.example.demo.service.VolunteerProfileService;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class VolunteerProfileServiceImpl implements VolunteerProfileService {
 
-    private final VolunteerProfileRepository repository;
+    private final VolunteerProfileRepository repo;
 
-    public VolunteerProfileServiceImpl(VolunteerProfileRepository repository) {
-        this.repository = repository;
+    public VolunteerProfileServiceImpl(VolunteerProfileRepository repo) {
+        this.repo = repo;
     }
 
     @Override
     public VolunteerProfile createVolunteer(VolunteerProfile profile) {
-        return repository.save(profile);
+
+        if (repo.existsByVolunteerId(profile.getVolunteerId()))
+            throw new BadRequestException("VolunteerId already exists");
+
+        if (repo.existsByEmail(profile.getEmail()))
+            throw new BadRequestException("Email already exists");
+
+        if (repo.existsByPhone(profile.getPhone()))
+            throw new BadRequestException("Phone already exists");
+
+        return repo.save(profile);
     }
 
     @Override
     public VolunteerProfile getVolunteerById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Volunteer not found"));
+        return repo.findById(id)
+                .orElseThrow(() -> new BadRequestException("Volunteer not found"));
     }
 
     @Override
     public List<VolunteerProfile> getAllVolunteers() {
-        return repository.findAll();
+        return repo.findAll();
     }
 
     @Override
-    public Optional<VolunteerProfile> getByVolunteerCode(String volunteerCode) {
-        return repository.findByVolunteerCode(volunteerCode);
-    }
-
-    @Override
-    public VolunteerProfile updateVolunteer(Long id, VolunteerProfile profile) {
-        VolunteerProfile existing = getVolunteerById(id);
-
-        existing.setFullName(profile.getFullName());
-        existing.setEmail(profile.getEmail());
-        existing.setPhone(profile.getPhone());
-        existing.setAvailabilityStatus(profile.getAvailabilityStatus());
-
-        return repository.save(existing);
-    }
-
-    @Override
-    public List<VolunteerProfile> getAvailableVolunteers() {
-        return repository.findByAvailabilityStatus("AVAILABLE");
+    public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
+        return repo.findByVolunteerId(volunteerId);
     }
 }

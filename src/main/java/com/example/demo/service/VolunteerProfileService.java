@@ -13,9 +13,5 @@ public interface VolunteerProfileService {
 
     List<VolunteerProfile> getAllVolunteers();
 
-    Optional<VolunteerProfile> getByVolunteerCode(String volunteerCode);
-
-    VolunteerProfile updateVolunteer(Long id, VolunteerProfile profile);
-
-    List<VolunteerProfile> getAvailableVolunteers();
+    Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
 }
