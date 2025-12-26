@@ -12,3 +12,4 @@ public interface VolunteerSkillService {
 
     List<VolunteerSkillRecord> getSkillsBySkill(String skillName);
 }
++
