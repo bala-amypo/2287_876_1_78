@@ -11,8 +11,7 @@ public class VolunteerProfileServiceImpl
 
     private final VolunteerProfileRepository repo;
 
-    public VolunteerProfileServiceImpl(
-            VolunteerProfileRepository repo) {
+    public VolunteerProfileServiceImpl(VolunteerProfileRepository repo) {
         this.repo = repo;
     }
 
@@ -22,13 +21,13 @@ public class VolunteerProfileServiceImpl
     }
 
     @Override
-    public VolunteerProfile getByVolunteerCode(String code) {
-        return repo.findByVolunteerCode(code);
+    public VolunteerProfile findByVolunteerId(String volunteerId) {
+        return repo.findByVolunteerId(volunteerId);
     }
 
     @Override
-    public VolunteerProfile updateVolunteer(
-            Long id, VolunteerProfile profile) {
+    public VolunteerProfile updateVolunteer(Long id,
+                                            VolunteerProfile profile) {
         profile.setId(id);
         return repo.save(profile);
     }

@@ -14,14 +14,15 @@ public class VolunteerProfileController {
         this.service = service;
     }
 
-    @GetMapping("/{code}")
-    public VolunteerProfile getByCode(@PathVariable String code) {
-        return service.getByVolunteerCode(code);
-    }
-
     @PostMapping
     public VolunteerProfile create(@RequestBody VolunteerProfile profile) {
         return service.save(profile);
+    }
+
+    @GetMapping("/{volunteerId}")
+    public VolunteerProfile getByVolunteerId(
+            @PathVariable String volunteerId) {
+        return service.findByVolunteerId(volunteerId);
     }
 
     @PutMapping("/{id}")
