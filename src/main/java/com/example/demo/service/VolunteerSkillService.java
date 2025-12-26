@@ -10,4 +10,6 @@ public interface VolunteerSkillService {
     List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId);
 
     List<VolunteerSkillRecord> getSkillsBySkill(String skillName);
+    VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill);
+
 }

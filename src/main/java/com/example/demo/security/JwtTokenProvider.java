@@ -23,5 +23,12 @@ public class JwtTokenProvider {
 public String getUsernameFromToken(String token) {
     return "testuser";
 }
+public Claims getAllClaims(String token) {
+    return Jwts.parserBuilder()
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+}
 
 }

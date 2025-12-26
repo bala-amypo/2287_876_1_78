@@ -30,6 +30,10 @@ public List<VolunteerSkillRecord> getSkillsByVolunteer(Long volunteerId) {
 public List<VolunteerSkillRecord> getSkillsBySkill(String skillName) {
     return repository.findBySkillName(skillName);
 }
+ @Override
+public VolunteerSkillRecord addOrUpdateSkill(VolunteerSkillRecord skill) {
+    return skill;
+}
 
 
 }
