@@ -12,13 +12,12 @@ import java.io.PrintWriter;
 @Component
 public class HelloServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(
-            HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException, IOException {
+ @Override
+public void doGet(HttpServletRequest request,
+                  HttpServletResponse response) throws IOException {
+    response.getWriter().write("Hello");
+}
 
-        response.setContentType("text/plain");
 
         PrintWriter out = response.getWriter();
         out.print("Hello Servlet");
