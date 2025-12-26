@@ -17,12 +17,17 @@ public class TaskRecordController {
     }
 
     @PostMapping
-    public TaskRecord createTask(@RequestBody TaskRecord task) {
-        return service.createTask(task);
+    public TaskRecord create(@RequestBody TaskRecord task) {
+        return service.save(task);
     }
 
     @GetMapping
-    public List<TaskRecord> getAllTasks() {
-        return service.getAllTasks();
+    public List<TaskRecord> getAll() {
+        return service.getAll();
+    }
+
+    @GetMapping("/{taskCode}")
+    public TaskRecord getByCode(@PathVariable String taskCode) {
+        return service.getTaskByCode(taskCode);
     }
 }

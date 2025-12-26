@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TaskRecordServiceImpl implements TaskRecordService {
+public class TaskRecordServiceImpl
+        implements TaskRecordService {
 
     private final TaskRecordRepository repo;
 
@@ -25,5 +26,10 @@ public class TaskRecordServiceImpl implements TaskRecordService {
     @Override
     public List<TaskRecord> getAll() {
         return repo.findAll();
+    }
+
+    @Override
+    public TaskRecord getTaskByCode(String taskCode) {
+        return repo.findByTaskCode(taskCode);
     }
 }

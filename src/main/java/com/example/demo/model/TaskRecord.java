@@ -11,39 +11,19 @@ public class TaskRecord {
 
     private String taskCode;
     private String taskName;
-    private String requiredSkill;
-    private String requiredSkillLevel;
-
-    @Enumerated(EnumType.STRING)
-    private Priority priority;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    // 🔹 INNER ENUMS (IMPORTANT)
-    public enum Priority {
-        LOW,
-        MEDIUM,
-        HIGH
-    }
-
     public enum Status {
-        PENDING,
-        IN_PROGRESS,
+        OPEN,
+        ASSIGNED,
         COMPLETED
     }
 
-    // 🔹 Constructors
-    public TaskRecord() {
-    }
-
-    // 🔹 Getters & Setters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTaskCode() {
@@ -62,28 +42,12 @@ public class TaskRecord {
         this.taskName = taskName;
     }
 
-    public String getRequiredSkill() {
-        return requiredSkill;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRequiredSkill(String requiredSkill) {
-        this.requiredSkill = requiredSkill;
-    }
-
-    public String getRequiredSkillLevel() {
-        return requiredSkillLevel;
-    }
-
-    public void setRequiredSkillLevel(String requiredSkillLevel) {
-        this.requiredSkillLevel = requiredSkillLevel;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Status getStatus() {

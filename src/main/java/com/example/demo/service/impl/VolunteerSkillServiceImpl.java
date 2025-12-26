@@ -5,7 +5,7 @@ import com.example.demo.repository.VolunteerSkillRecordRepository;
 import com.example.demo.service.VolunteerSkillService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class VolunteerSkillServiceImpl
@@ -21,7 +21,12 @@ public class VolunteerSkillServiceImpl
     @Override
     public VolunteerSkillRecord addSkill(
             VolunteerSkillRecord record) {
-        record.setUpdatedAt(LocalDateTime.now());
         return repo.save(record);
+    }
+
+    @Override
+    public List<VolunteerSkillRecord> getSkillsByVolunteer(
+            Long volunteerId) {
+        return repo.findByVolunteerId(volunteerId);
     }
 }

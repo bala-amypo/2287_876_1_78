@@ -1,10 +1,8 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "volunteer_skill_record")
 public class VolunteerSkillRecord {
 
     @Id
@@ -12,18 +10,8 @@ public class VolunteerSkillRecord {
     private Long id;
 
     private Long volunteerId;
-
     private String skillName;
-
-    private int level;
-
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    @PreUpdate
-    public void updateTime() {
-        this.updatedAt = LocalDateTime.now();
-    }
+    private int skillLevel;
 
     public Long getId() {
         return id;
@@ -36,14 +24,6 @@ public class VolunteerSkillRecord {
     public void setVolunteerId(Long volunteerId) {
         this.volunteerId = volunteerId;
     }
-    public int getSkillLevel() {
-    return skillLevel;
-}
-
-public void setUpdatedAt(LocalDateTime updatedAt) {
-    this.updatedAt = updatedAt;
-}
-
 
     public String getSkillName() {
         return skillName;
@@ -53,15 +33,11 @@ public void setUpdatedAt(LocalDateTime updatedAt) {
         this.skillName = skillName;
     }
 
-    public int getLevel() {
-        return level;
+    public int getSkillLevel() {
+        return skillLevel;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public void setSkillLevel(int skillLevel) {
+        this.skillLevel = skillLevel;
     }
 }
