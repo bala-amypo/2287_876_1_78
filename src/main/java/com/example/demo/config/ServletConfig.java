@@ -10,11 +10,8 @@ public class ServletConfig {
 
     @Bean
     public ServletRegistrationBean<HelloServlet> helloServletRegistration(
-            HelloServlet servlet) {
+            HelloServlet helloServlet) {
 
-        ServletRegistrationBean<HelloServlet> registration =
-                new ServletRegistrationBean<>(servlet, "/hello");
-        registration.setLoadOnStartup(1);
-        return registration;
+        return new ServletRegistrationBean<>(helloServlet, "/hello");
     }
 }
