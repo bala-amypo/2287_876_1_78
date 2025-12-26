@@ -17,12 +17,14 @@ public class AssignmentEvaluationController {
     }
 
     @PostMapping
-    public AssignmentEvaluationRecord evaluateAssignment(@RequestBody AssignmentEvaluationRecord evaluation) {
-        return service.evaluateAssignment(evaluation);
+    public AssignmentEvaluationRecord evaluateAssignment(
+            @RequestBody AssignmentEvaluationRecord record) {
+        return service.evaluateAssignment(record);
     }
 
     @GetMapping("/{assignmentId}")
-    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(@PathVariable Long assignmentId) {
+    public List<AssignmentEvaluationRecord> getEvaluations(
+            @PathVariable Long assignmentId) {
         return service.getEvaluationsByAssignment(assignmentId);
     }
 }
