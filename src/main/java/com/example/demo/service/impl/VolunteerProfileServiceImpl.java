@@ -1,45 +1,28 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.VolunteerProfile;
 import com.example.demo.repository.VolunteerProfileRepository;
 import com.example.demo.service.VolunteerProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class VolunteerProfileServiceImpl implements VolunteerProfileService {
 
-    private final VolunteerProfileRepository volunteerProfileRepository;
+    @Autowired
+    private VolunteerProfileRepository repository;
 
-    public VolunteerProfileServiceImpl(VolunteerProfileRepository volunteerProfileRepository) {
-        this.volunteerProfileRepository = volunteerProfileRepository;
+    @Override
+    public VolunteerProfile updateVolunteer(Long id, VolunteerProfile profile) {
+        VolunteerProfile existing = repository.findById(id).orElseThrow();
+        existing.setName(profile.getName());
+        existing.setEmail(profile.getEmail());
+        existing.setPhone(profile.getPhone());
+        return repository.save(existing);
     }
 
     @Override
-    @Transactional
-    public VolunteerProfile createVolunteerProfile(VolunteerProfile volunteer) {
-        if (volunteerProfileRepository.existsByEmail(volunteer.getEmail())) {
-            throw new BadRequestException("Email already exists");
-        }
-        return volunteerProfileRepository.save(volunteer);
-    }
-
-    @Override
-    public List<VolunteerProfile> getAllVolunteers() {
-        return volunteerProfileRepository.findAll();
-    }
-
-    @Override
-    public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
-        return volunteerProfileRepository.findByVolunteerId(volunteerId);
-    }
-
-    @Override
-    public List<VolunteerProfile> getAvailableVolunteers() {
-        return volunteerProfileRepository.findByAvailabilityStatus("available");
+    public VolunteerProfile getByVolunteerCode(String code) {
+        return repository.findByVolunteerCode(code);
     }
 }

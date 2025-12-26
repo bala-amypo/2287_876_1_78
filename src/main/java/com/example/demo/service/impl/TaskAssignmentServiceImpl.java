@@ -3,33 +3,24 @@ package com.example.demo.service.impl;
 import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.repository.TaskAssignmentRepository;
 import com.example.demo.service.TaskAssignmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class TaskAssignmentServiceImpl implements TaskAssignmentService {
 
-    private final TaskAssignmentRepository taskAssignmentRepository;
+    @Autowired
+    private TaskAssignmentRepository repository;
 
-    public TaskAssignmentServiceImpl(TaskAssignmentRepository taskAssignmentRepository) {
-        this.taskAssignmentRepository = taskAssignmentRepository;
+    @Override
+    public List<TaskAssignmentRecord> getAssignmentsByTask(Long taskId) {
+        return repository.findByTaskId(taskId);
     }
 
     @Override
-    @Transactional
-    public TaskAssignmentRecord assignTask(TaskAssignmentRecord assignment) {
-        return taskAssignmentRepository.save(assignment);
-    }
-
-    @Override
-    public List<TaskAssignmentRecord> getAllAssignments() {
-        return taskAssignmentRepository.findAll();
-    }
-
-    @Override
-    public List<TaskAssignmentRecord> getAssignmentsByVolunteer(Long volunteerId) {
-        return taskAssignmentRepository.findByVolunteerId(volunteerId);
+    public void deleteAssignment(Long id) {
+        repository.deleteById(id);
     }
 }

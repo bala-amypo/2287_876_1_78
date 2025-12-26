@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.service.TaskAssignmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,30 +11,16 @@ import java.util.List;
 @RequestMapping("/task-assignments")
 public class TaskAssignmentController {
 
-    private final TaskAssignmentService service;
-
-    public TaskAssignmentController(TaskAssignmentService service) {
-        this.service = service;
-    }
-
-    @PostMapping("/{taskId}")
-    public TaskAssignmentRecord assignTask(@PathVariable Long taskId) {
-        return service.assignTask(taskId);
-    }
+    @Autowired
+    private TaskAssignmentService service;
 
     @GetMapping("/task/{taskId}")
-    public List<TaskAssignmentRecord> getByTask(@PathVariable Long taskId) {
+    public List<TaskAssignmentRecord> getAssignmentsByTask(@PathVariable Long taskId) {
         return service.getAssignmentsByTask(taskId);
     }
 
-    @GetMapping("/volunteer/{volunteerId}")
-    public List<TaskAssignmentRecord> getByVolunteer(
-            @PathVariable Long volunteerId) {
-        return service.getAssignmentsByVolunteer(volunteerId);
-    }
-
-    @GetMapping
-    public List<TaskAssignmentRecord> getAll() {
-        return service.getAllAssignments();
+    @DeleteMapping("/{id}")
+    public void deleteAssignment(@PathVariable Long id) {
+        service.deleteAssignment(id);
     }
 }
