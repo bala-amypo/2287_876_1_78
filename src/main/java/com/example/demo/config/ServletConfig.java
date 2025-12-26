@@ -9,9 +9,13 @@ import org.springframework.context.annotation.Configuration;
 public class ServletConfig {
 
     @Bean
-    public ServletRegistrationBean<HelloServlet> helloServletRegistration(
-            HelloServlet helloServlet) {
+    public HelloServlet helloServlet() {
+        return new HelloServlet(); // Bean create panrom
+    }
 
-        return new ServletRegistrationBean<>(helloServlet, "/hello");
+    @Bean
+    public ServletRegistrationBean<HelloServlet> helloServletRegistration(HelloServlet helloServlet) {
+        ServletRegistrationBean<HelloServlet> registrationBean = new ServletRegistrationBean<>(helloServlet, "/hello");
+        return registrationBean;
     }
 }
