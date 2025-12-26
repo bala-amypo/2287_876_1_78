@@ -13,11 +13,10 @@ public interface VolunteerProfileRepository
 
     boolean existsByVolunteerId(String volunteerId);
 
-    boolean existsByEmail(String email);
-
     boolean existsByPhone(String phone);
 
-    Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
 
     List<VolunteerProfile> findByAvailabilityStatus(String status);
+     Optional<VolunteerProfile> findByVolunteerId(String volunteerId);
+    boolean existsByEmail(String email);
 }
