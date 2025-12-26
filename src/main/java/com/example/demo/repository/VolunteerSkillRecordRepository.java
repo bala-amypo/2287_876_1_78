@@ -14,5 +14,6 @@ public interface VolunteerSkillRecordRepository
 
     List<VolunteerSkillRecord> findBySkillName(String skillName);
 
-    List<VolunteerSkillRecord> findBySkillNameAndSkillLevel(String skillName, String skillLevel);
+    List<VolunteerSkillRecord> findBySkillNameAndSkillLevel(
+            String skillName, String skillLevel);
 }
