@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TaskRecordRepository
-        extends JpaRepository<TaskRecord, Long> {
-
+public interface TaskRecordRepository extends JpaRepository<TaskRecord, Long> {
     List<TaskRecord> findByStatus(String status);
-
-    Optional<TaskRecord> findByTaskCode(String taskCode);
+    Optional<TaskRecord> findByTaskCode(String code);
 }

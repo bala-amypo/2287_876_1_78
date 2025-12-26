@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VolunteerSkillRecordRepository
-        extends JpaRepository<VolunteerSkillRecord, Long> {
-
+public interface VolunteerSkillRecordRepository extends JpaRepository<VolunteerSkillRecord, Long> {
     List<VolunteerSkillRecord> findByVolunteerId(Long volunteerId);
-
     List<VolunteerSkillRecord> findBySkillName(String skillName);
+    List<VolunteerSkillRecord> findBySkillNameAndSkillLevel(String name, String level);
 }
+
