@@ -39,13 +39,12 @@ public class VolunteerProfileServiceImpl implements VolunteerProfileService {
     }
 
     @Override
-    public VolunteerProfile getByVolunteerCode(String volunteerCode) {
-        return volunteerProfileRepository.findByVolunteerId(volunteerCode).orElse(null);
+    public Optional<VolunteerProfile> findByVolunteerId(String volunteerId) {
+        return volunteerProfileRepository.findByVolunteerId(volunteerId);
     }
 
     @Override
-    public List<VolunteerProfile> findByVolunteerId(String volunteerId) {
-        Optional<VolunteerProfile> volunteer = volunteerProfileRepository.findByVolunteerId(volunteerId);
-        return volunteer.map(List::of).orElse(List.of());
+    public VolunteerProfile getByVolunteerCode(String volunteerCode) {
+        return volunteerProfileRepository.findByVolunteerId(volunteerCode).orElse(null);
     }
 }
