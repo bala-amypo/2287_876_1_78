@@ -13,7 +13,7 @@ public class AssignmentEvaluationRecord {
     private Long assignmentId;
     private int score;
     private String remarks;
-
+        private Long volunteerId;
     private LocalDateTime evaluatedAt;
 
     public Long getId() {
