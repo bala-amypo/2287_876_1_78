@@ -1,5 +1,6 @@
 package com.example.demo.config;
 import com.example.demo.security.JwtTokenProvider;
+package com.example.demo.security;
 
 import org.springframework.stereotype.Component;
 
