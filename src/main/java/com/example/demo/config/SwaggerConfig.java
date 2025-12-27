@@ -15,6 +15,24 @@ public class SwaggerConfig {
                         .title("Skill Based Volunteer Task Assignor API")
                         .version("1.0")
                         .description("API for managing volunteer task assignments based on skills"));
+                     SecurityScheme bearerAuth = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT");
+
+        Server server = new Server()
+                .url("https://9127.32procr.amypo.ai/")
+                .description("Production Server");
+
+        return new OpenAPI()
+                .addSecurityItem(
+                        new SecurityRequirement().addList("bearerAuth")
+                )
+                .components(
+                        new Components().addSecuritySchemes("bearerAuth", bearerAuth)
+                )
+                .servers(List.of(server));
+ 
     }
 }
 package com.example.demo.config;
