@@ -11,33 +11,27 @@ import java.util.List;
 public class TaskAssignmentServiceImpl
         implements TaskAssignmentService {
 
-    private final TaskAssignmentRecordRepository
-            taskAssignmentRecordRepository;
+    private final TaskAssignmentRecordRepository taskAssignmentRecordRepository;
 
     public TaskAssignmentServiceImpl(
             TaskAssignmentRecordRepository taskAssignmentRecordRepository) {
-        this.taskAssignmentRecordRepository =
-                taskAssignmentRecordRepository;
+        this.taskAssignmentRecordRepository = taskAssignmentRecordRepository;
     }
 
     @Override
     public TaskAssignmentRecord assignTask(
             TaskAssignmentRecord taskAssignmentRecord) {
-
-        return taskAssignmentRecordRepository
-                .save(taskAssignmentRecord);
+        return taskAssignmentRecordRepository.save(taskAssignmentRecord);
     }
 
     @Override
-    public List<TaskAssignmentRecord> getAssignments() {
+    public List<TaskAssignmentRecord> getAllAssignments() {
         return taskAssignmentRecordRepository.findAll();
     }
 
     @Override
     public List<TaskAssignmentRecord> getAssignmentsByVolunteer(
             Long volunteerId) {
-
-        return taskAssignmentRecordRepository
-                .findAll();
+        return taskAssignmentRecordRepository.findAll();
     }
 }
