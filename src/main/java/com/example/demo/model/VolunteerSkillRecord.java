@@ -28,7 +28,10 @@ public class VolunteerSkillRecord {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    public VolunteerSkillRecord() {}
+    public VolunteerSkillRecord() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
     
     public VolunteerSkillRecord(Long volunteerId, String skillName, String skillLevel, boolean certified) {
         this.volunteerId = volunteerId;

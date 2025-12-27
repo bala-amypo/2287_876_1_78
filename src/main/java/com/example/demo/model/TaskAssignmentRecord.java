@@ -25,7 +25,11 @@ public class TaskAssignmentRecord {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
-    public TaskAssignmentRecord() {}
+    public TaskAssignmentRecord() {
+        this.status = "ACTIVE";
+        this.assignedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
     
     public TaskAssignmentRecord(Long taskId, Long volunteerId, String status) {
         this.taskId = taskId;
