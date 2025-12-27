@@ -12,20 +12,17 @@ public class AssignmentEvaluationController {
 
     private final AssignmentEvaluationService service;
 
-    public AssignmentEvaluationController(
-            AssignmentEvaluationService service) {
+    public AssignmentEvaluationController(AssignmentEvaluationService service) {
         this.service = service;
     }
 
     @PostMapping
-    public AssignmentEvaluationRecord evaluate(
-            @RequestBody AssignmentEvaluationRecord record) {
-        return service.evaluateAssignment(record);
+    public AssignmentEvaluationRecord evaluate(@RequestBody AssignmentEvaluationRecord evaluation) {
+        return service.evaluateAssignment(evaluation);
     }
 
-    @GetMapping("/{assignmentId}")
-    public List<AssignmentEvaluationRecord> getByAssignment(
-            @PathVariable Long assignmentId) {
-        return service.getEvaluationsByAssignment(assignmentId);
+    @GetMapping("/{taskAssignmentId}")
+    public List<AssignmentEvaluationRecord> getByTaskAssignment(@PathVariable Long taskAssignmentId) {
+        return service.getEvaluationsByTaskAssignment(taskAssignmentId);
     }
 }

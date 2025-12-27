@@ -8,31 +8,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AssignmentEvaluationServiceImpl
-        implements AssignmentEvaluationService {
+public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationService {
 
-    private final AssignmentEvaluationRecordRepository
-            assignmentEvaluationRecordRepository;
+    private final AssignmentEvaluationRecordRepository repository;
 
-    public AssignmentEvaluationServiceImpl(
-            AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository) {
-
-        this.assignmentEvaluationRecordRepository =
-                assignmentEvaluationRecordRepository;
+    public AssignmentEvaluationServiceImpl(AssignmentEvaluationRecordRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public AssignmentEvaluationRecord evaluateAssignment(
-            AssignmentEvaluationRecord evaluation) {
-
-        return assignmentEvaluationRecordRepository.save(evaluation);
+    public AssignmentEvaluationRecord evaluateAssignment(AssignmentEvaluationRecord evaluation) {
+        return repository.save(evaluation);
     }
 
     @Override
-    public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(
-            Long assignmentId) {
-
-        return assignmentEvaluationRecordRepository
-                .findByTaskAssignmentId(assignmentId);
+    public List<AssignmentEvaluationRecord> getEvaluationsByTaskAssignment(Long taskAssignmentId) {
+        return repository.findByTaskAssignment_Id(taskAssignmentId);
     }
 }

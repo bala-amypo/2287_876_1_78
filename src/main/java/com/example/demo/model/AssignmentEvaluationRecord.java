@@ -10,53 +10,28 @@ public class AssignmentEvaluationRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long assignmentId;
-    private int score;
-    private String remarks;
-        private Long volunteerId;
+    private String feedback;
+    private int marks;
+
     private LocalDateTime evaluatedAt;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "task_assignment_id")  // foreign key column
+    private TaskAssignmentRecord taskAssignment;
 
-    public Long getAssignmentId() {
-        return assignmentId;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setAssignmentId(Long assignmentId) {
-        this.assignmentId = assignmentId;
-    }
+    public String getFeedback() { return feedback; }
+    public void setFeedback(String feedback) { this.feedback = feedback; }
 
-    public int getScore() {
-        return score;
-    }
+    public int getMarks() { return marks; }
+    public void setMarks(int marks) { this.marks = marks; }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+    public LocalDateTime getEvaluatedAt() { return evaluatedAt; }
+    public void setEvaluatedAt(LocalDateTime evaluatedAt) { this.evaluatedAt = evaluatedAt; }
 
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
-    public LocalDateTime getEvaluatedAt() {
-        return evaluatedAt;
-    }
-
-    public void setEvaluatedAt(LocalDateTime evaluatedAt) {
-        this.evaluatedAt = evaluatedAt;
-    }
-    public Long getVolunteerId() {
-    return volunteerId;
-}
-
-public void setVolunteerId(Long volunteerId) {
-    this.volunteerId = volunteerId;
-}
-
+    public TaskAssignmentRecord getTaskAssignment() { return taskAssignment; }
+    public void setTaskAssignment(TaskAssignmentRecord taskAssignment) { this.taskAssignment = taskAssignment; }
 }
