@@ -1,28 +1,33 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.AssignmentEvaluationRecord;
 import com.example.demo.service.AssignmentEvaluationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/evaluations")
+@RequestMapping("/api/evaluations")
 public class AssignmentEvaluationController {
 
-    private final AssignmentEvaluationService service;
-
-    public AssignmentEvaluationController(AssignmentEvaluationService service) {
-        this.service = service;
-    }
+    @Autowired
+    private AssignmentEvaluationService assignmentEvaluationService;
 
     @PostMapping
-    public AssignmentEvaluationRecord evaluate(@RequestBody AssignmentEvaluationRecord evaluation) {
-        return service.evaluateAssignment(evaluation);
+    public ResponseEntity<AssignmentEvaluationRecord> evaluateAssignment(@RequestBody AssignmentEvaluationRecord evaluation) {
+        if (evaluation.getAssignmentId() == null || evaluation.getRating() == null) {
+            throw new BadRequestException("Assignment ID and Rating are required");
+        }
+        AssignmentEvaluationRecord created = assignmentEvaluationService.evaluateAssignment(evaluation);
+        return ResponseEntity.ok(created);
     }
 
-    @GetMapping("/{taskAssignmentId}")
-    public List<AssignmentEvaluationRecord> getByTaskAssignment(@PathVariable Long taskAssignmentId) {
-        return service.getEvaluationsByTaskAssignment(taskAssignmentId);
+    @GetMapping("/assignment/{assignmentId}")
+    public ResponseEntity<List<AssignmentEvaluationRecord>> getEvaluationsByAssignment(@PathVariable Long assignmentId) {
+        List<AssignmentEvaluationRecord> evaluations = assignmentEvaluationService.getEvaluationsByAssignment(assignmentId);
+        return ResponseEntity.ok(evaluations);
     }
 }

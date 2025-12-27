@@ -1,20 +1,37 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.JwtService;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.security.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    private final JwtService jwtService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-    public AuthController(JwtService jwtService) {
-        this.jwtService = jwtService;
-    }
+    @Autowired
+    private JwtTokenProvider tokenProvider;
 
-    @PostMapping("/token")
-    public String generateToken(@RequestParam String username) {
-        return jwtService.generateToken(username);
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = tokenProvider.generateToken(authentication, 1L, "USER");
+        return ResponseEntity.ok(new AuthResponse(jwt));
     }
 }
