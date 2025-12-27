@@ -8,13 +8,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TaskAssignmentServiceImpl implements TaskAssignmentService {
+public class TaskAssignmentServiceImpl
+        implements TaskAssignmentService {
 
-    private final TaskAssignmentRecordRepository taskAssignmentRecordRepository;
+    private final TaskAssignmentRecordRepository
+            taskAssignmentRecordRepository;
 
     public TaskAssignmentServiceImpl(
             TaskAssignmentRecordRepository taskAssignmentRecordRepository) {
-        this.taskAssignmentRecordRepository = taskAssignmentRecordRepository;
+
+        this.taskAssignmentRecordRepository =
+                taskAssignmentRecordRepository;
     }
 
     @Override
@@ -28,5 +32,12 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
     public List<TaskAssignmentRecord> getAllTaskAssignments() {
         return taskAssignmentRecordRepository.findAll();
     }
+
+    @Override
+    public List<TaskAssignmentRecord> getAssignmentsByVolunteer(
+            Long volunteerId) {
+
+        return taskAssignmentRecordRepository
+                .findByVolunteerId(volunteerId);
+    }
 }
-    
