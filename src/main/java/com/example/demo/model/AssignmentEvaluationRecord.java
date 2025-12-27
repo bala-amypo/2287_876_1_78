@@ -51,4 +51,12 @@ public class AssignmentEvaluationRecord {
     public void setEvaluatedAt(LocalDateTime evaluatedAt) {
         this.evaluatedAt = evaluatedAt;
     }
+    public Long getVolunteerId() {
+    return volunteerId;
+}
+
+public void setVolunteerId(Long volunteerId) {
+    this.volunteerId = volunteerId;
+}
+
 }
