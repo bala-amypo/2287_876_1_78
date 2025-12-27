@@ -1,33 +1,39 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.TaskRecord;
 import com.example.demo.service.TaskRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/tasks")
 public class TaskRecordController {
 
-    private final TaskRecordService service;
-
-    public TaskRecordController(TaskRecordService service) {
-        this.service = service;
-    }
+    @Autowired
+    private TaskRecordService taskRecordService;
 
     @PostMapping
-    public TaskRecord create(@RequestBody TaskRecord task) {
-        return service.save(task);
+    public ResponseEntity<TaskRecord> createTask(@RequestBody TaskRecord task) {
+        if (task.getTaskName() == null || task.getTaskName().isEmpty()) {
+            throw new BadRequestException("Task name is required");
+        }
+        TaskRecord created = taskRecordService.createTask(task);
+        return ResponseEntity.ok(created);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskRecord> getTaskById(@PathVariable Long id) {
+        TaskRecord task = taskRecordService.getTaskById(id);
+        return ResponseEntity.ok(task);
     }
 
     @GetMapping
-    public List<TaskRecord> getAll() {
-        return service.getAll();
-    }
-
-    @GetMapping("/{taskCode}")
-    public TaskRecord getByCode(@PathVariable String taskCode) {
-        return service.getTaskByCode(taskCode);
+    public ResponseEntity<List<TaskRecord>> getAllTasks() {
+        List<TaskRecord> tasks = taskRecordService.getAllTasks();
+        return ResponseEntity.ok(tasks);
     }
 }

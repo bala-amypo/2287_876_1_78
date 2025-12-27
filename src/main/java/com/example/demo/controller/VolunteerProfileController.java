@@ -1,33 +1,41 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.VolunteerProfile;
 import com.example.demo.service.VolunteerProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/volunteers")
+@RequestMapping("/api/volunteers")
 public class VolunteerProfileController {
 
-    private final VolunteerProfileService service;
-
-    public VolunteerProfileController(VolunteerProfileService service) {
-        this.service = service;
-    }
+    @Autowired
+    private VolunteerProfileService volunteerProfileService;
 
     @PostMapping
-    public VolunteerProfile create(@RequestBody VolunteerProfile profile) {
-        return service.save(profile);
+    public ResponseEntity<VolunteerProfile> createVolunteer(@RequestBody VolunteerProfile volunteer) {
+        if (volunteer.getVolunteerId() == null || volunteer.getVolunteerId().isEmpty()) {
+            throw new BadRequestException("Volunteer ID is required");
+        }
+        VolunteerProfile created = volunteerProfileService.createVolunteer(volunteer);
+        return ResponseEntity.ok(created);
     }
 
-    @GetMapping("/{volunteerId}")
-    public VolunteerProfile getByVolunteerId(
-            @PathVariable String volunteerId) {
-        return service.findByVolunteerId(volunteerId);
+    @GetMapping("/{id}")
+    public ResponseEntity<VolunteerProfile> getVolunteerById(@PathVariable Long id) {
+        VolunteerProfile volunteer = volunteerProfileService.getVolunteerById(id);
+        return ResponseEntity.ok(volunteer);
     }
 
-    @PutMapping("/{id}")
-    public VolunteerProfile update(@PathVariable Long id,
-                                   @RequestBody VolunteerProfile profile) {
-        return service.updateVolunteer(id, profile);
+    @GetMapping
+    public ResponseEntity<List<VolunteerProfile>> getAllVolunteers() {
+        List<VolunteerProfile> volunteers = volunteerProfileService.getAllVolunteers();
+        return ResponseEntity.ok(volunteers);
     }
+
+
 }
