@@ -1,5 +1,5 @@
 package com.example.demo.repository;
-import com.example.demo.model.AssignmentRecord;
+import com.example.demo.model.TaskAssignmentRecord;
 import com.example.demo.model.AssignmentEvaluationRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 

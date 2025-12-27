@@ -16,20 +16,20 @@ public class TaskAssignmentServiceImpl
 
     public TaskAssignmentServiceImpl(
             TaskAssignmentRecordRepository taskAssignmentRecordRepository) {
-
         this.taskAssignmentRecordRepository =
                 taskAssignmentRecordRepository;
     }
 
     @Override
-    public TaskAssignmentRecord createTaskAssignment(
-            TaskAssignmentRecord taskAssignment) {
+    public TaskAssignmentRecord assignTask(
+            TaskAssignmentRecord taskAssignmentRecord) {
 
-        return taskAssignmentRecordRepository.save(taskAssignment);
+        return taskAssignmentRecordRepository
+                .save(taskAssignmentRecord);
     }
 
     @Override
-    public List<TaskAssignmentRecord> getAllTaskAssignments() {
+    public List<TaskAssignmentRecord> getAssignments() {
         return taskAssignmentRecordRepository.findAll();
     }
 
@@ -38,6 +38,6 @@ public class TaskAssignmentServiceImpl
             Long volunteerId) {
 
         return taskAssignmentRecordRepository
-                .findByVolunteerId(volunteerId);
+                .findAll();
     }
 }
