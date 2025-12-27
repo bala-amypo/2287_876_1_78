@@ -9,20 +9,35 @@ public class VolunteerSkillRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long volunteerId;
     private String skillName;
     private int skillLevel;
-    private boolean certified;
 
-    // Getters and setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getSkillName() { return skillName; }
-    public void setSkillName(String skillName) { this.skillName = skillName; }
+    public Long getVolunteerId() {
+        return volunteerId;
+    }
 
-    public int getSkillLevel() { return skillLevel; }
-    public void setSkillLevel(int skillLevel) { this.skillLevel = skillLevel; }
+    public void setVolunteerId(Long volunteerId) {
+        this.volunteerId = volunteerId;
+    }
 
-    public boolean isCertified() { return certified; }
-    public void setCertified(boolean certified) { this.certified = certified; }
+    public String getSkillName() {
+        return skillName;
+    }
+
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
+    public int getSkillLevel() {
+        return skillLevel;
+    }
+
+    public void setSkillLevel(int skillLevel) {
+        this.skillLevel = skillLevel;
+    }
 }
