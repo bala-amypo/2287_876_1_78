@@ -10,28 +10,19 @@ public class AssignmentEvaluationRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long assignmentId;
+    private Integer rating;
     private String feedback;
-    private int marks;
-
-    private LocalDateTime evaluatedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "task_assignment_id")  // foreign key column
-    private TaskAssignmentRecord taskAssignment;
+    private LocalDateTime evaluatedAt = LocalDateTime.now();
 
     // Getters and Setters
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
+    public Long getAssignmentId() { return assignmentId; }
+    public void setAssignmentId(Long assignmentId) { this.assignmentId = assignmentId; }
+    public Integer getRating() { return rating; }
+    public void setRating(Integer rating) { this.rating = rating; }
     public String getFeedback() { return feedback; }
     public void setFeedback(String feedback) { this.feedback = feedback; }
-
-    public int getMarks() { return marks; }
-    public void setMarks(int marks) { this.marks = marks; }
-
     public LocalDateTime getEvaluatedAt() { return evaluatedAt; }
     public void setEvaluatedAt(LocalDateTime evaluatedAt) { this.evaluatedAt = evaluatedAt; }
-
-    public TaskAssignmentRecord getTaskAssignment() { return taskAssignment; }
-    public void setTaskAssignment(TaskAssignmentRecord taskAssignment) { this.taskAssignment = taskAssignment; }
 }

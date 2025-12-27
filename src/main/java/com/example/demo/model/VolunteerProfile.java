@@ -3,22 +3,36 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-public class AssignmentEvaluationRecord {
+public class VolunteerProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long assignmentId;
-    private int rating;
+    @Column(unique = true)
+    private String volunteerId;
 
-    // Getters and setters
+    private String fullName;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(unique = true)
+    private String phone;
+
+    private String availabilityStatus;
+
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public Long getAssignmentId() { return assignmentId; }
-    public void setAssignmentId(Long assignmentId) { this.assignmentId = assignmentId; }
-
-    public int getRating() { return rating; }
-    public void setRating(int rating) { this.rating = rating; }
+    public String getVolunteerId() { return volunteerId; }
+    public void setVolunteerId(String volunteerId) { this.volunteerId = volunteerId; }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+    public String getAvailabilityStatus() { return availabilityStatus; }
+    public void setAvailabilityStatus(String availabilityStatus) { this.availabilityStatus = availabilityStatus; }
 }
