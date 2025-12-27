@@ -18,11 +18,11 @@ public class TaskAssignmentController {
 
     @GetMapping
     public List<TaskAssignmentRecord> getAll() {
-        return service.getAll();
+        return service.getAllAssignments();
     }
 
     @PostMapping
-    public TaskAssignmentRecord create(@RequestBody TaskAssignmentRecord record) {
+    public TaskAssignmentRecord assign(@RequestBody TaskAssignmentRecord record) {
         return service.assignTask(record);
     }
 }

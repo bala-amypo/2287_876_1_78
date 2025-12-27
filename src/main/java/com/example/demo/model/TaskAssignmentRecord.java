@@ -3,7 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "task_assignment")
+@Table(name = "task_assignments")
 public class TaskAssignmentRecord {
 
     @Id
@@ -13,8 +13,17 @@ public class TaskAssignmentRecord {
     private Long taskId;
     private Long volunteerId;
 
+    @Enumerated(EnumType.STRING)
+    private AssignmentStatus status;
+
+    public TaskAssignmentRecord() {}
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getTaskId() {
@@ -28,16 +37,16 @@ public class TaskAssignmentRecord {
     public Long getVolunteerId() {
         return volunteerId;
     }
-    public String getStatus() {
-    return status;
-}
-
-public void setStatus(String status) {
-    this.status = status;
-}
-
 
     public void setVolunteerId(Long volunteerId) {
         this.volunteerId = volunteerId;
+    }
+
+    public AssignmentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AssignmentStatus status) {
+        this.status = status;
     }
 }
