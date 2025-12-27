@@ -23,7 +23,9 @@ public class AssignmentEvaluationRecord {
     @Column(name = "evaluated_at")
     private LocalDateTime evaluatedAt;
     
-    public AssignmentEvaluationRecord() {}
+    public AssignmentEvaluationRecord() {
+        this.evaluatedAt = LocalDateTime.now();
+    }
     
     public AssignmentEvaluationRecord(Long assignmentId, Integer rating, String comments) {
         this.assignmentId = assignmentId;
