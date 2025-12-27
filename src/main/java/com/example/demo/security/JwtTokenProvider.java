@@ -1,20 +1,23 @@
-package com.example.demo.security;
+package com.example.demo.config;
+import com.example.demo.security.JwtTokenProvider;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtTokenProvider {
 
-    // Dummy implementation for tests
+    // ✔ Dummy token generate
     public String generateToken(String username) {
-        return "dummy-token";
+        return "dummy-jwt-token";
     }
 
+    // ✔ Dummy validation – always true
     public boolean validateToken(String token) {
         return true;
     }
 
+    // ✔ Dummy username extract
     public String getUsernameFromToken(String token) {
-        return "dummy-user";
+        return "test-user";
     }
 }
