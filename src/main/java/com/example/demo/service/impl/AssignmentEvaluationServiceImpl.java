@@ -1,48 +1,52 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.AssignmentEvaluationRecord;
-import com.example.demo.model.AssignmentStatus;
 import com.example.demo.model.TaskAssignmentRecord;
-import com.example.demo.repository.AssignmentEvaluationRepository;
-import com.example.demo.repository.TaskAssignmentRepository;
+import com.example.demo.repository.AssignmentEvaluationRecordRepository;
+import com.example.demo.repository.TaskAssignmentRecordRepository;
 import com.example.demo.service.AssignmentEvaluationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AssignmentEvaluationServiceImpl
-        implements AssignmentEvaluationService {
+public class AssignmentEvaluationServiceImpl implements AssignmentEvaluationService {
 
-    private final AssignmentEvaluationRepository evaluationRepository;
-    private final TaskAssignmentRepository taskAssignmentRepository;
+    private final AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository;
+    private final TaskAssignmentRecordRepository taskAssignmentRecordRepository;
 
     public AssignmentEvaluationServiceImpl(
-            AssignmentEvaluationRepository evaluationRepository,
-            TaskAssignmentRepository taskAssignmentRepository) {
-        this.evaluationRepository = evaluationRepository;
-        this.taskAssignmentRepository = taskAssignmentRepository;
+            AssignmentEvaluationRecordRepository assignmentEvaluationRecordRepository,
+            TaskAssignmentRecordRepository taskAssignmentRecordRepository) {
+
+        this.assignmentEvaluationRecordRepository = assignmentEvaluationRecordRepository;
+        this.taskAssignmentRecordRepository = taskAssignmentRecordRepository;
     }
 
     @Override
     public AssignmentEvaluationRecord evaluateAssignment(
             AssignmentEvaluationRecord evaluation) {
 
-        TaskAssignmentRecord assignment =
-                taskAssignmentRepository.findById(
-                        evaluation.getAssignmentId())
-                        .orElseThrow(() ->
-                                new RuntimeException("Assignment not found"));
+        // Save evaluation
+        AssignmentEvaluationRecord saved =
+                assignmentEvaluationRecordRepository.save(evaluation);
 
-        assignment.setStatus(AssignmentStatus.EVALUATED);
-        taskAssignmentRepository.save(assignment);
+        // Optional: update task assignment status if needed
+        if (evaluation.getTaskAssignment() != null) {
+            TaskAssignmentRecord taskAssignment =
+                    evaluation.getTaskAssignment();
 
-        return evaluationRepository.save(evaluation);
+            taskAssignmentRecordRepository.save(taskAssignment);
+        }
+
+        return saved;
     }
 
     @Override
     public List<AssignmentEvaluationRecord> getEvaluationsByAssignment(
             Long assignmentId) {
-        return evaluationRepository.findByAssignmentId(assignmentId);
+
+        return assignmentEvaluationRecordRepository
+                .findByTaskAssignmentId(assignmentId);
     }
 }

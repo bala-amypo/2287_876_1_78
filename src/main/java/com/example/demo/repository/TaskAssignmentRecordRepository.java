@@ -6,4 +6,3 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TaskAssignmentRecordRepository
         extends JpaRepository<TaskAssignmentRecord, Long> {
 }
-    
