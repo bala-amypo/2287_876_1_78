@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
@@ -26,6 +27,10 @@ public class SwaggerConfig {
                 .description("Production Server");
 
         return new OpenAPI()
+                .info(new Info()
+                        .title("Volunteer Skill Matcher")
+                        .version("1.0")
+                        .description("API for managing volunteer task assignments based on skills"))
                 .addSecurityItem(
                         new SecurityRequirement().addList("bearerAuth")
                 )
