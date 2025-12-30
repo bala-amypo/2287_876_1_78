@@ -29,6 +29,7 @@ public class AuthController {
                         loginRequest.getPassword()
                 )
         );
+        
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken(authentication, 1L, "USER");
